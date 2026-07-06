@@ -5,10 +5,15 @@ versus what's still ahead, and gives the concrete next steps for each.
 
 ## What's live now (Phase 1 — in `public/index.html`)
 
-- A 15-question seed bank across all 5 HKDSE Biology syllabus strands x
-  Easy/Medium/Hard, bilingual (EN / 繁中), with 4 questions built around original
-  SVG diagrams (enzyme rate vs. temperature, potato osmosis bar chart, yeast
-  population growth curve, primary/secondary antibody response) — demonstrating
+- A 30-question seed bank across all 5 HKDSE Biology syllabus strands x
+  Easy/Medium/Hard, bilingual (EN / 繁中): 15 original questions plus 15 more
+  adapted from real 2025 HKDSE Biology Paper 1A (same concept/difficulty,
+  reworded context and numbers, redrawn diagrams — never the original
+  wording or artwork, per the copyright note below). 7 questions across the
+  bank use original SVG diagrams (enzyme rate vs. temperature, potato
+  osmosis bar chart, yeast population growth curve, primary/secondary
+  antibody response, a heart-valve schematic, an age-group mortality bar
+  chart, and a leaf CO₂-exchange/compensation-point graph) — demonstrating
   the "read a graph, answer the question" format.
 - DSE-style MCQ player: numbered stem, A–D options, instant marking.
 - Answer + explanation panel, hidden by default, opened on click (point 7).

@@ -1387,6 +1387,377 @@
         hint_zh: "負回饋應對抗原來的變化（血糖上升應觸發使血糖下降的反應，即胰島素而非胰高血糖素）。",
         explanation_en: "When blood glucose rises, the pancreas (islets of Langerhans) detects this and secretes insulin. Insulin stimulates liver and muscle cells to take up glucose and convert it into glycogen for storage, lowering blood glucose back towards the normal set point. Glucagon has the opposite effect and is released when blood glucose is too low, not too high.",
         explanation_zh: "當血糖上升時，胰臟（胰島）會偵測到此變化並分泌胰島素。胰島素刺激肝臟及肌肉細胞吸收葡萄糖，並將其轉化為肝醣儲存，使血糖回復至正常水平。胰高血糖素的作用則相反，是在血糖過低（而非過高）時釋放。"
+      },
+
+      // -----------------------------------------------------------
+      // The 15 questions below (source: "hkdse-style") are adapted
+      // from real 2025 HKDSE Biology Paper 1A multiple-choice
+      // questions: same underlying concept and difficulty, but with
+      // reworded context, changed numbers/species, and redrawn
+      // original diagrams - never the original wording or artwork.
+      // -----------------------------------------------------------
+      {
+        id: "cm-e2",
+        topic: "Cells and Molecules",
+        subtopic: "Microscopy and magnification",
+        difficulty: "easy",
+        source: "hkdse-style",
+        stem_en: "A photomicrograph shows a plant cell magnified ×400. The width of the cell in the printed photo measures 20 mm. What is the actual width of the cell?",
+        stem_zh: "一張顯微照片顯示一個放大了400倍的植物細胞。該細胞在照片上的寬度量得20毫米。這個細胞的實際寬度是多少？",
+        options: [
+          { key: "A", en: "0.05 μm", zh: "0.05 微米" },
+          { key: "B", en: "0.5 μm", zh: "0.5 微米" },
+          { key: "C", en: "5 μm", zh: "5 微米" },
+          { key: "D", en: "50 μm", zh: "50 微米" }
+        ],
+        answer: "D",
+        hint_en: "Actual size = image size ÷ magnification. Watch the unit conversion between mm and μm (1 mm = 1000 μm).",
+        hint_zh: "實際大小 = 影像大小 ÷ 放大倍數。留意毫米與微米之間的單位換算（1毫米 = 1000微米）。",
+        explanation_en: "Actual size = image size ÷ magnification = 20 mm ÷ 400 = 0.05 mm. Since 1 mm = 1000 μm, 0.05 mm = 50 μm. A common mistake is forgetting to convert the answer from millimetres into micrometres.",
+        explanation_zh: "實際大小 = 影像大小 ÷ 放大倍數 = 20毫米 ÷ 400 = 0.05毫米。由於1毫米 = 1000微米，所以0.05毫米 = 50微米。常見錯誤是忘記把答案由毫米換算成微米。"
+      },
+      {
+        id: "cm-m2",
+        topic: "Cells and Molecules",
+        subtopic: "Enzymes",
+        difficulty: "medium",
+        source: "hkdse-style",
+        stem_en: "Extract P and Extract Q are secretions from two digestive glands. Extract P contains only a protease. Extract Q contains both a protease and an amylase. Which of the following method(s) can be used to distinguish between Extract P and Extract Q?\n(1) Mix each extract with a protein solution and then carry out the biuret test.\n(2) Mix each extract with a starch solution and then carry out the iodine test.\n(3) Mix each extract with a sucrose solution and then carry out Benedict's test.",
+        stem_zh: "萃取物P和萃取物Q是兩種消化腺的分泌物。萃取物P只含有一種蛋白酶。萃取物Q同時含有一種蛋白酶及一種澱粉酶。以下哪種／哪些方法可用來分辨萃取物P和萃取物Q？\n(1) 把每種萃取物與蛋白質溶液混合，然後進行雙縮脲測試。\n(2) 把每種萃取物與澱粉溶液混合，然後進行碘液測試。\n(3) 把每種萃取物與蔗糖溶液混合，然後進行本尼迪特測試。",
+        options: [
+          { key: "A", en: "(1) only", zh: "只有 (1)" },
+          { key: "B", en: "(2) only", zh: "只有 (2)" },
+          { key: "C", en: "(1) and (3) only", zh: "只有 (1) 及 (3)" },
+          { key: "D", en: "(2) and (3) only", zh: "只有 (2) 及 (3)" }
+        ],
+        answer: "B",
+        hint_en: "Think about which enzyme is present in one extract but not the other, and which test detects that enzyme's effect.",
+        hint_zh: "想一想哪種酶只存在於其中一種萃取物中，以及哪個測試能偵測該酶的作用。",
+        explanation_en: "Both extracts contain a protease, so the biuret test after adding protein would give a similarly positive result for both — it cannot distinguish them. Neither extract contains sucrase, so Benedict's test after adding sucrose would be negative for both. Only Extract Q contains amylase, which breaks down starch; the iodine test after adding starch would show a clear difference (Extract Q loses the blue-black colour, Extract P does not) — this is the only test that distinguishes them.",
+        explanation_zh: "兩種萃取物皆含有蛋白酶，因此加入蛋白質後進行雙縮脲測試，兩者結果相似，不能分辨。兩種萃取物皆不含蔗糖酶，因此加入蔗糖後進行本尼迪特測試，兩者皆呈陰性，同樣不能分辨。只有萃取物Q含有澱粉酶，能分解澱粉；加入澱粉後進行碘液測試會出現明顯分別（萃取物Q會失去藍黑色，萃取物P則不會）——這是唯一能分辨兩者的測試。"
+      },
+      {
+        id: "cm-h2",
+        topic: "Cells and Molecules",
+        subtopic: "Aerobic respiration",
+        difficulty: "hard",
+        source: "hkdse-style",
+        stem_en: "The procedures below were used to study aerobic respiration:\n1. Isolated mitochondria are added to a test tube of buffer solution.\n2. Glucose solution is added and the oxygen concentration is monitored for 5 minutes.\n3. Pyruvate solution is then added to the same mixture and the oxygen concentration is monitored for another 5 minutes.\nWhich of the following combinations about the change in oxygen concentration is correct?",
+        stem_zh: "以下程序用作研究有氧呼吸作用：\n1. 把分離出來的線粒體加入盛有緩衝溶液的試管中。\n2. 加入葡萄糖溶液，並連續監測氧氣濃度5分鐘。\n3. 然後把丙酮酸溶液加入同一混合物，再連續監測氧氣濃度多5分鐘。\n以下哪個組合正確描述氧氣濃度的變化？",
+        options: [
+          { key: "A", en: "After glucose: decrease. After pyruvate: decrease", zh: "加入葡萄糖後：下降。加入丙酮酸後：下降" },
+          { key: "B", en: "After glucose: decrease. After pyruvate: no change", zh: "加入葡萄糖後：下降。加入丙酮酸後：不變" },
+          { key: "C", en: "After glucose: no change. After pyruvate: decrease", zh: "加入葡萄糖後：不變。加入丙酮酸後：下降" },
+          { key: "D", en: "After glucose: no change. After pyruvate: no change", zh: "加入葡萄糖後：不變。加入丙酮酸後：不變" }
+        ],
+        answer: "C",
+        hint_en: "Remember which stage of respiration happens in the cytoplasm, and which happens inside the mitochondrion itself.",
+        hint_zh: "記住呼吸作用中哪個階段在細胞質中進行，哪個階段在線粒體內部進行。",
+        explanation_en: "Glycolysis (glucose → pyruvate) takes place in the cytoplasm using enzymes that isolated mitochondria do not contain, so adding glucose alone produces no change in oxygen use. The Krebs cycle and electron transport chain, which consume oxygen, occur inside the mitochondrion and require pyruvate as a starting material — so once pyruvate is added, oxygen concentration decreases as it is used up in aerobic respiration.",
+        explanation_zh: "糖酵解（葡萄糖→丙酮酸）在細胞質中進行，需要分離出來的線粒體並不具備的酶，因此單獨加入葡萄糖不會令氧氣濃度改變。消耗氧氣的克氏循環及電子傳遞鏈則在線粒體內部進行，並需要丙酮酸作為原料——因此加入丙酮酸後，氧氣會在有氧呼吸作用中被消耗，濃度下降。"
+      },
+      {
+        id: "ge-e2",
+        topic: "Genetics and Evolution",
+        subtopic: "Reproduction and variation",
+        difficulty: "easy",
+        source: "hkdse-style",
+        stem_en: "Study the following two statements:\nI: Offspring produced by sexual reproduction generally show more genetic variation than offspring produced by asexual reproduction.\nII: Sexual reproduction requires two parents and involves the fusion of gametes, while asexual reproduction involves only one parent and no gamete fusion.\nWhich of the following descriptions about the two statements is correct?",
+        stem_zh: "細閱以下兩項陳述：\nI：透過有性生殖產生的後代，一般比透過無性生殖產生的後代顯示出更多遺傳變異。\nII：有性生殖需要兩個親本並涉及配子融合，而無性生殖只涉及一個親本，並不涉及配子融合。\n以下哪項描述這兩項陳述的說法正確？",
+        options: [
+          { key: "A", en: "Both I and II are correct, and II explains I.", zh: "I 及 II 皆正確，並且 II 能解釋 I。" },
+          { key: "B", en: "Both I and II are correct, but II does not explain I.", zh: "I 及 II 皆正確，但 II 不能解釋 I。" },
+          { key: "C", en: "I is correct but II is incorrect.", zh: "I 正確，但 II 不正確。" },
+          { key: "D", en: "I is incorrect but II is correct.", zh: "I 不正確，但 II 正確。" }
+        ],
+        answer: "A",
+        hint_en: "Consider whether combining genetic material from two parents, as described in statement II, would logically lead to more variation, as claimed in statement I.",
+        hint_zh: "想一想陳述II所描述的「結合兩個親本的遺傳物質」，是否能合理解釋陳述I所指的「更多變異」。",
+        explanation_en: "Statement I is correct: sexual reproduction combines genetic material from two parents through meiosis and fertilisation, producing offspring with new allele combinations, so variation is generally higher than in asexual reproduction (which produces genetically identical clones). Statement II accurately describes this mechanism and directly explains why sexual reproduction produces more variation, so both statements are correct and II explains I.",
+        explanation_zh: "陳述I正確：有性生殖透過減數分裂及受精作用，結合兩個親本的遺傳物質，產生具有新等位基因組合的後代，因此變異一般比無性生殖（產生基因相同的複製體）更多。陳述II準確描述了這個機制，並直接解釋了陳述I中變異較多的原因，因此兩項陳述皆正確，並且II能解釋I。"
+      },
+      {
+        id: "ge-m2",
+        topic: "Genetics and Evolution",
+        subtopic: "Gene expression",
+        difficulty: "medium",
+        source: "hkdse-style",
+        stem_en: "A photomicrograph shows two very different-looking human cells from the same person: a skin cell and a muscle cell. Both cells developed from the same fertilised egg through mitosis. Which of the following best explains why these two cell types look so different?",
+        stem_zh: "一張顯微照片顯示同一個人身上兩種外觀截然不同的細胞：皮膚細胞及肌肉細胞。這兩種細胞都是由同一個受精卵經有絲分裂發育而成。以下哪項最能解釋這兩種細胞外觀如此不同？",
+        options: [
+          { key: "A", en: "They contain different genes.", zh: "它們含有不同的基因。" },
+          { key: "B", en: "They express different genes.", zh: "它們表現不同的基因。" },
+          { key: "C", en: "They contain different genomes.", zh: "它們含有不同的基因組。" },
+          { key: "D", en: "They have different numbers of chromosomes.", zh: "它們的染色體數目不同。" }
+        ],
+        answer: "B",
+        hint_en: "Remember that almost all body cells produced by mitosis contain an identical copy of the genome — differentiation comes from which genes are switched on, not which genes are present.",
+        hint_zh: "記住幾乎所有由有絲分裂產生的體細胞都擁有相同的基因組——細胞分化是由哪些基因被啟動決定，而非由擁有哪些基因決定。",
+        explanation_en: "Skin cells and muscle cells both arise from the same fertilised egg via mitosis, so they contain the same genome and the same number of chromosomes. Their very different structure and function result from differential gene expression — different sets of genes are switched on or off in each cell type — not from having different genes or a different genome.",
+        explanation_zh: "皮膚細胞及肌肉細胞皆由同一個受精卵經有絲分裂而成，因此擁有相同的基因組及相同的染色體數目。它們截然不同的結構及功能，是由於不同的基因表現（不同的基因在各細胞類型中被啟動或關閉）所致，而非因為擁有不同的基因或基因組。"
+      },
+      {
+        id: "ge-h2",
+        topic: "Genetics and Evolution",
+        subtopic: "Patterns of inheritance",
+        difficulty: "hard",
+        source: "hkdse-style",
+        stem_en: "Genetic disorder Z in mice is controlled by a single pair of alleles. A male mouse affected by disorder Z was crossed with an unaffected female mouse. The cross produced 98 unaffected male offspring and 101 affected female offspring, with no other phenotypes observed. Which combination correctly describes the allele for disorder Z?",
+        stem_zh: "小鼠的遺傳病Z由一對等位基因控制。一隻患有遺傳病Z的雄性小鼠與一隻沒有患病的雌性小鼠交配。這次交配產生了98隻沒有患病的雄性後代及101隻患病的雌性後代，沒有觀察到其他表現型。以下哪個組合正確描述遺傳病Z的等位基因？",
+        options: [
+          { key: "A", en: "Dominant; on an autosome", zh: "顯性；位於常染色體上" },
+          { key: "B", en: "Dominant; on a sex chromosome", zh: "顯性；位於性染色體上" },
+          { key: "C", en: "Recessive; on an autosome", zh: "隱性；位於常染色體上" },
+          { key: "D", en: "Recessive; on a sex chromosome", zh: "隱性；位於性染色體上" }
+        ],
+        answer: "B",
+        hint_en: "Work out which parent contributes the X chromosome to sons and to daughters, and use that to test each option.",
+        hint_zh: "想一想兒子和女兒的X染色體分別來自哪個親本，並以此驗證各選項。",
+        explanation_en: "All daughters are affected and all sons are unaffected. The affected father must pass the disease allele to every daughter (via his X chromosome) but to no sons (who instead receive his Y chromosome). This pattern only fits an X-linked dominant allele: daughters inherit the father's dominant disease allele on X and always express it (since it is dominant); sons inherit only the mother's normal X allele and the father's Y chromosome, so they are unaffected. An autosomal or recessive pattern would not split this cleanly by sex.",
+        explanation_zh: "所有女兒都患病，而所有兒子都沒有患病。患病的父親必定把致病等位基因（經其X染色體）傳給每名女兒，卻不會傳給任何兒子（兒子從父親得到的是Y染色體）。這個模式只符合性聯顯性遺傳：女兒從父親遺傳到位於X染色體上的顯性致病等位基因，由於是顯性，因此必定表現患病；兒子則只從母親遺傳到正常的X等位基因，並從父親得到Y染色體，因此不會患病。常染色體或隱性遺傳都不會如此清楚地按性別劃分。"
+      },
+      {
+        id: "oe-e2",
+        topic: "Organisms and Environment",
+        subtopic: "Experimental design",
+        difficulty: "easy",
+        source: "hkdse-style",
+        stem_en: "Two students are investigating the effect of magnesium deficiency on plant growth, using several seedlings in each group. They want any difference in growth to be due only to magnesium availability, not to uneven light exposure. Student P suggests placing the light source to the side of the seedlings. Student Q suggests placing the light source directly above the seedlings, shining down equally on all of them. Which of the following statements is correct?",
+        stem_zh: "兩位學生正在研究缺鎂對植物生長的影響，每組使用數株幼苗。他們希望生長上的任何差異只是由於鎂的供應不同，而非由於光照不均勻所致。學生P建議把光源放置在幼苗的側面。學生Q建議把光源直接放置在幼苗的正上方，使所有幼苗均勻受光。以下哪項陳述正確？",
+        options: [
+          { key: "A", en: "Student P's method is better because it matches how sunlight often reaches plants from one direction in nature.", zh: "學生P的方法較佳，因為這模擬了大自然中陽光經常從單一方向照射植物的情況。" },
+          { key: "B", en: "Both methods are equally valid because the same number of seedlings are used in each group.", zh: "兩種方法同樣有效，因為每組使用相同數量的幼苗。" },
+          { key: "C", en: "Both methods are equally valid because both are controlled experiments.", zh: "兩種方法同樣有效，因為兩者都是對照實驗。" },
+          { key: "D", en: "Student Q's method is better because it reduces uneven light exposure between seedlings within the same group.", zh: "學生Q的方法較佳，因為它能減少同一組內幼苗之間光照不均的情況。" }
+        ],
+        answer: "D",
+        hint_en: "A fair test should keep every seedling within a group exposed to conditions as similar as possible, other than the factor being tested (magnesium).",
+        hint_zh: "公平測試應盡量令同一組內每株幼苗所處的環境相似，唯一不同的應該只是被測試的因素（鎂）。",
+        explanation_en: "If the light source is placed to one side, seedlings closer to the light receive more light than those further away, introducing an extra uncontrolled variable within each group. Placing the light source directly above exposes all seedlings to more similar light intensity, keeping light as a controlled variable so that any difference in growth can be attributed to magnesium availability rather than uneven lighting.",
+        explanation_zh: "若光源放置在一側，較接近光源的幼苗會比較遠的幼苗接收更多光線，令組內出現額外的失控變項。把光源放置在正上方，可令所有幼苗接收較相若的光照強度，使光照成為受控變項，讓生長上的差異能歸因於鎂的供應，而非光照不均。"
+      },
+      {
+        id: "oe-m2",
+        topic: "Organisms and Environment",
+        subtopic: "Plant mineral nutrition",
+        difficulty: "medium",
+        source: "hkdse-style",
+        stem_en: "A herbicide, chemical X, blocks the electron transport chain in the mitochondria of plant root cells. If farmland soil becomes contaminated with chemical X, what would be the likely effects on the plants growing there?",
+        stem_zh: "除草劑「化學物質X」會阻斷植物根細胞線粒體中的電子傳遞鏈。假若農地土壤受到化學物質X污染，生長在該處的植物最可能受到什麼影響？",
+        options: [
+          { key: "A", en: "Mineral ion absorption: decreases. Water absorption: decreases", zh: "礦物質離子吸收：下降。水分吸收：下降" },
+          { key: "B", en: "Mineral ion absorption: stays the same. Water absorption: decreases", zh: "礦物質離子吸收：不變。水分吸收：下降" },
+          { key: "C", en: "Mineral ion absorption: decreases. Water absorption: stays the same", zh: "礦物質離子吸收：下降。水分吸收：不變" },
+          { key: "D", en: "Mineral ion absorption: stays the same. Water absorption: stays the same", zh: "礦物質離子吸收：不變。水分吸收：不變" }
+        ],
+        answer: "C",
+        hint_en: "Think about which of the two processes directly requires ATP from respiration, and which is largely a passive process.",
+        hint_zh: "想一想這兩個過程中，哪一個直接需要呼吸作用產生的ATP，哪一個主要是被動過程。",
+        explanation_en: "Mineral ion absorption by root hair cells mostly occurs through active transport, which requires ATP produced by aerobic respiration. Blocking the electron transport chain reduces ATP production, so mineral absorption decreases. Water absorption occurs mainly by osmosis, a passive process that does not directly require ATP, so it remains largely unaffected.",
+        explanation_zh: "根毛細胞吸收礦物質離子主要透過主動運輸進行，需要有氧呼吸作用產生的ATP。阻斷電子傳遞鏈會減少ATP的產生，因此礦物質吸收下降。水分吸收則主要透過滲透作用進行，是一個不直接需要ATP的被動過程，因此大致不受影響。"
+      },
+      {
+        id: "oe-h2",
+        topic: "Organisms and Environment",
+        subtopic: "Photosynthesis and compensation point",
+        difficulty: "hard",
+        source: "hkdse-style",
+        stem_en: "Leaf G is a fully green leaf and Leaf V is a variegated (partly white) leaf with less chlorophyll, from the same plant. The graph below shows the net carbon dioxide exchange of both leaves as the light changes from dim to bright.",
+        stem_zh: "葉G是一片全綠的葉片，葉V則是同一植物上一片斑葉（部分呈白色），含較少葉綠素。下圖顯示當光照由昏暗轉為明亮時，兩片葉子的淨二氧化碳交換量。",
+        figure: {
+          caption_en: "Net CO₂ exchange against time (dim light → bright light)",
+          caption_zh: "淨二氧化碳交換量對時間的關係圖（昏暗光照 → 明亮光照）",
+          svg: `<svg viewBox="0 0 330 200" xmlns="http://www.w3.org/2000/svg">
+            <line x1="45" y1="20" x2="45" y2="170" stroke="#334155" stroke-width="2"/>
+            <line x1="45" y1="95" x2="290" y2="95" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 3"/>
+            <line x1="170" y1="20" x2="170" y2="170" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 3"/>
+            <text x="85" y="15" font-size="10" fill="#334155">Dim light</text>
+            <text x="205" y="15" font-size="10" fill="#334155">Bright light</text>
+            <polyline points="45,95 170,95 200,120 240,128 290,130" fill="none" stroke="#0f766e" stroke-width="3"/>
+            <text x="293" y="133" font-size="10" fill="#0f766e">Leaf V</text>
+            <polyline points="45,120 170,120 200,155 240,163 290,165" fill="none" stroke="#b91c1c" stroke-width="3"/>
+            <text x="293" y="168" font-size="10" fill="#b91c1c">Leaf G</text>
+            <text x="8" y="98" font-size="9" fill="#6b7280">0</text>
+            <text x="10" y="35" font-size="9" fill="#334155">Net CO&#8322;</text>
+            <text x="10" y="46" font-size="9" fill="#334155">release(+)/</text>
+            <text x="10" y="57" font-size="9" fill="#334155">absorb(-)</text>
+          </svg>`
+        },
+        options: [
+          { key: "A", en: "Leaf V is at its compensation point throughout the bright light period.", zh: "葉V在整段明亮光照期間都處於補償點。" },
+          { key: "B", en: "Leaf G has a higher rate of photosynthesis than Leaf V under bright light because it contains more chlorophyll.", zh: "在明亮光照下，葉G的光合作用速率比葉V高，因為它含有較多葉綠素。" },
+          { key: "C", en: "Leaf V absorbs more carbon dioxide than Leaf G once light becomes bright.", zh: "一旦光照變得明亮，葉V吸收的二氧化碳比葉G多。" },
+          { key: "D", en: "Both leaves have the same compensation point under dim light.", zh: "兩片葉子在昏暗光照下的補償點相同。" }
+        ],
+        answer: "B",
+        hint_en: "Compare how far each line drops below the zero line once the light becomes bright — a bigger drop means more net carbon dioxide absorption, i.e. more photosynthesis.",
+        hint_zh: "比較光照變明亮後，每條線在零線以下下降的幅度——下降幅度越大，代表淨吸收的二氧化碳越多，即光合作用越強。",
+        explanation_en: "Under dim light, Leaf V sits exactly on the zero line (its compensation point, where photosynthesis rate equals respiration rate), while Leaf G already sits below zero, meaning it is already photosynthesising faster than it respires even in dim light. Once light becomes bright, both leaves increase their net CO₂ absorption, but Leaf G's line drops much further below zero than Leaf V's — since it has more chlorophyll, it can increase its photosynthetic rate more than the variegated leaf.",
+        explanation_zh: "在昏暗光照下，葉V的曲線正好落在零線上（即其補償點，此時光合作用速率等於呼吸作用速率），而葉G的曲線已低於零線，即使在昏暗光照下，其光合作用速率已高於呼吸作用速率。一旦光照變得明亮，兩片葉子的淨二氧化碳吸收量都會增加，但葉G的曲線下降幅度遠比葉V大——由於葉G含有較多葉綠素，其光合作用速率能提升得更多。"
+      },
+      {
+        id: "hd-e2",
+        topic: "Health and Diseases",
+        subtopic: "Interpreting health data",
+        difficulty: "easy",
+        source: "hkdse-style",
+        stem_en: "The graph below shows the number of deaths due to Disease Y in a city in 2023, by age group.",
+        stem_zh: "下圖顯示某城市在2023年因疾病Y而死亡的人數，按年齡組別劃分。",
+        figure: {
+          caption_en: "Number of deaths due to Disease Y by age group, 2023",
+          caption_zh: "2023年因疾病Y死亡的人數（按年齡組別劃分）",
+          svg: `<svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg">
+            <line x1="45" y1="20" x2="45" y2="160" stroke="#334155" stroke-width="2"/>
+            <line x1="45" y1="160" x2="280" y2="160" stroke="#334155" stroke-width="2"/>
+            <rect x="60" y="145" width="35" height="15" fill="#0f766e"/>
+            <rect x="110" y="110" width="35" height="50" fill="#0f766e"/>
+            <rect x="160" y="70" width="35" height="90" fill="#0f766e"/>
+            <rect x="210" y="35" width="35" height="125" fill="#0f766e"/>
+            <text x="10" y="35" font-size="11" fill="#334155">Deaths</text>
+            <text x="77" y="175" font-size="9" fill="#6b7280" text-anchor="middle">0-19</text>
+            <text x="127" y="175" font-size="9" fill="#6b7280" text-anchor="middle">20-44</text>
+            <text x="177" y="175" font-size="9" fill="#6b7280" text-anchor="middle">45-64</text>
+            <text x="227" y="175" font-size="9" fill="#6b7280" text-anchor="middle">65+</text>
+            <text x="160" y="188" font-size="10" fill="#334155" text-anchor="middle">Age group (years)</text>
+          </svg>`
+        },
+        options: [
+          { key: "A", en: "People below 20 cannot develop Disease Y.", zh: "20歲以下人士不可能患上疾病Y。" },
+          { key: "B", en: "People aged 45-64 are most likely to be exposed to a virus causing Disease Y.", zh: "45至64歲人士最有可能接觸到引致疾病Y的病毒。" },
+          { key: "C", en: "People aged 65+ have accumulated longer exposure to risk factors for Disease Y.", zh: "65歲以上人士對疾病Y的風險因素累積了較長的接觸時間。" },
+          { key: "D", en: "Older age groups suffered a greater number of deaths due to Disease Y.", zh: "較年長的組別因疾病Y而死亡的人數較多。" }
+        ],
+        answer: "D",
+        hint_en: "Only pick the statement that the graph's data can directly support — a death-count graph alone cannot prove causes like virus exposure or accumulated risk-factor exposure.",
+        hint_zh: "只選擇圖表數據能直接支持的陳述——單憑死亡人數圖表，並不能證明病毒接觸或風險因素累積等成因。",
+        explanation_en: "The graph only shows the number of deaths in each age group — it does not provide any information about the cause of Disease Y, so conclusions about viruses or accumulated risk-factor exposure (B and C) go beyond what the data shows. It also cannot rule out cases below 20 (A), since the bar for that group is small but not necessarily zero. The only conclusion directly supported by the graph is that older age groups had a greater number of deaths.",
+        explanation_zh: "圖表只顯示各年齡組別的死亡人數，並沒有提供任何關於疾病Y成因的資訊，因此關於病毒或風險因素累積接觸的結論（B及C）超出了數據所能證明的範圍。圖表亦不能排除20歲以下有病例（A），因為該組別的柱狀雖小，但不一定是零。圖表直接支持的結論，就只有較年長的組別死亡人數較多。"
+      },
+      {
+        id: "hd-m2",
+        topic: "Health and Diseases",
+        subtopic: "Immune response",
+        difficulty: "medium",
+        source: "hkdse-style",
+        stem_en: "The antibody concentration against a certain virus in a person's blood was monitored over a 60-day period. A sharp, rapid rise in antibody concentration was observed on day 30, reaching a much higher peak than the initial response earlier in the period. Which of the following events most likely occurred on day 30?",
+        stem_zh: "研究人員在60天內監測一名人士血液中對某病毒的抗體濃度。研究發現抗體濃度在第30天急劇上升，並達到比該段時間較早前的初次反應高得多的峰值。以下哪項事件最有可能在第30天發生？",
+        options: [
+          { key: "A", en: "The person received a booster vaccination against the virus.", zh: "該人士接種了針對該病毒的加強劑疫苗。" },
+          { key: "B", en: "The person received a course of antibiotics.", zh: "該人士接受了一個療程的抗生素治療。" },
+          { key: "C", en: "The person received a blood transfusion containing antibodies.", zh: "該人士接受了含有抗體的輸血。" },
+          { key: "D", en: "The person was infected by the virus for the first time.", zh: "該人士首次受到該病毒感染。" }
+        ],
+        answer: "A",
+        hint_en: "A fast, large rise in antibody concentration is the signature of a secondary (memory) immune response, not a first-time infection.",
+        hint_zh: "抗體濃度快速且大幅上升，是次級（記憶性）免疫反應的特徵，而非首次感染的反應。",
+        explanation_en: "A rapid, large rise in antibody concentration is characteristic of a secondary immune response, produced when memory B cells recognise a pathogen (or vaccine antigen) they have already encountered before. A booster vaccination re-exposes the immune system to the antigen, triggering exactly this fast, strong memory response. A first-time infection (D) would instead produce a slower, smaller primary response. Antibiotics (B) act directly on bacteria and do not stimulate antibody production, and this scenario is about a virus, not a bacterial infection. A blood transfusion (C) would introduce ready-made antibodies rather than stimulate the person's own B cells to produce a large new wave of antibodies.",
+        explanation_zh: "抗體濃度快速且大幅上升，是次級免疫反應的特徵，這是記憶B細胞識別出先前已接觸過的病原體（或疫苗抗原）時所產生的反應。接種加強劑疫苗會令免疫系統再次接觸該抗原，正正觸發這種快速而強烈的記憶反應。首次感染（D）則會產生較慢、較弱的初次反應。抗生素（B）直接作用於細菌，並不會刺激抗體的產生，而且本情境涉及的是病毒而非細菌感染。輸血（C）只會引入現成的抗體，而不會刺激該人士自身的B細胞大量產生新的抗體。"
+      },
+      {
+        id: "hd-h2",
+        topic: "Health and Diseases",
+        subtopic: "Evaluating experimental claims",
+        difficulty: "hard",
+        source: "hkdse-style",
+        stem_en: "The table below shows results from an investigation into the effect of two plant extracts, Extract M and Extract N, on the growth of Bacterium Y, which commonly infects wounds:\nControl medium — doubling time: 20 min\nMedium + Extract M — doubling time: 45 min; respiration reduced by 20%; translation reduced by 5%\nMedium + Extract N — doubling time: 21 min; respiration reduced by 2%; translation reduced by 1%\nWhich of the following can be deduced from the table?",
+        stem_zh: "下表顯示一項研究兩種植物萃取物（萃取物M及萃取物N）對常見感染傷口的細菌Y生長影響的結果：\n對照培養基 — 倍增時間：20分鐘\n培養基 + 萃取物M — 倍增時間：45分鐘；呼吸作用下降20%；轉譯下降5%\n培養基 + 萃取物N — 倍增時間：21分鐘；呼吸作用下降2%；轉譯下降1%\n以下哪項可從表中推論得出？",
+        options: [
+          { key: "A", en: "Extract M is more effective than Extract N at inhibiting the growth of Bacterium Y.", zh: "萃取物M抑制細菌Y生長的效果比萃取物N好。" },
+          { key: "B", en: "Extract M is more effective than Extract N at healing wounds in humans.", zh: "萃取物M治療人類傷口的效果比萃取物N好。" },
+          { key: "C", en: "Extract M reduces the rate of protein synthesis in Bacterium Y by 20%.", zh: "萃取物M使細菌Y的蛋白質合成速率下降20%。" },
+          { key: "D", en: "Extract M slows bacterial respiration mainly by reducing translation.", zh: "萃取物M主要透過降低轉譯來減慢細菌的呼吸作用。" }
+        ],
+        answer: "A",
+        hint_en: "Only trust conclusions the table's numbers directly support — be wary of jumps from lab bacterial data to claims about human wound healing, or claims that mix up which percentage refers to which measurement.",
+        hint_zh: "只相信表中數字能直接支持的結論——小心從實驗室細菌數據跳到人類傷口療效的說法，也要小心把不同的百分比數字混淆。",
+        explanation_en: "Extract M nearly doubles Bacterium Y's doubling time (20 → 45 min) compared to Extract N's small effect (20 → 21 min), so Extract M is clearly more effective at inhibiting bacterial growth in this experiment — supporting A. However, slowing bacterial growth in a lab test tube does not prove Extract M heals human wounds better (B goes beyond the data — no wound-healing outcome was measured). The 20% figure in the table refers to a reduction in respiration, not protein synthesis/translation, which only dropped by 5% — so C misreads the numbers. While both respiration and translation dropped for Extract M, the table does not establish that the reduction in translation is the main cause of the change in respiration — D overstates what can be concluded from two correlated measurements.",
+        explanation_zh: "與萃取物N的輕微影響（20分鐘變21分鐘）相比，萃取物M使細菌Y的倍增時間幾乎倍增（20分鐘變45分鐘），因此在這個實驗中，萃取物M明顯較能抑制細菌生長——支持選項A。然而，在實驗室試管中減慢細菌生長，並不能證明萃取物M能更有效治療人類傷口（選項B超出了數據範圍——實驗並沒有量度傷口癒合的結果）。表中的20%是呼吸作用下降的數字，而非蛋白質合成／轉譯的數字（轉譯只下降了5%）——因此選項C誤讀了數字。雖然萃取物M同時令呼吸作用及轉譯下降，但表格並未證明轉譯下降是導致呼吸作用改變的主因——選項D對兩個相關的量度結果作出了過度的推論。"
+      },
+      {
+        id: "hp-e2",
+        topic: "Human Physiology",
+        subtopic: "Circulatory system",
+        difficulty: "easy",
+        source: "hkdse-style",
+        stem_en: "The diagram below shows a simplified view of a mammalian heart, with four valves labelled P, Q, R and S.",
+        stem_zh: "下圖顯示哺乳類心臟的簡化圖，當中標示了四個心瓣：P、Q、R及S。",
+        figure: {
+          caption_en: "Simplified heart diagram showing valves P, Q, R and S",
+          caption_zh: "簡化的心臟圖，顯示心瓣P、Q、R及S",
+          svg: `<svg viewBox="0 0 320 225" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 70 60 L 70 15 Q 70 5 90 5 L 140 5" fill="none" stroke="#334155" stroke-width="10" stroke-linecap="round"/>
+            <text x="145" y="10" font-size="10" fill="#334155">Aorta</text>
+            <path d="M 250 60 L 250 15 Q 250 5 230 5 L 180 5" fill="none" stroke="#334155" stroke-width="10" stroke-linecap="round"/>
+            <text x="130" y="22" font-size="10" fill="#334155" text-anchor="end">Pulmonary artery</text>
+            <rect x="62" y="58" width="16" height="8" fill="#b91c1c"/>
+            <text x="70" y="52" font-size="12" fill="#b91c1c" text-anchor="middle">S</text>
+            <rect x="242" y="58" width="16" height="8" fill="#b91c1c"/>
+            <text x="250" y="52" font-size="12" fill="#b91c1c" text-anchor="middle">R</text>
+            <rect x="40" y="65" width="70" height="45" rx="8" fill="#dff5f1" stroke="#0f766e" stroke-width="2"/>
+            <text x="75" y="91" font-size="10" text-anchor="middle" fill="#0f766e">Atrium</text>
+            <rect x="210" y="65" width="70" height="45" rx="8" fill="#dff5f1" stroke="#0f766e" stroke-width="2"/>
+            <text x="245" y="91" font-size="10" text-anchor="middle" fill="#0f766e">Atrium</text>
+            <rect x="67" y="108" width="16" height="8" fill="#1976D2"/>
+            <text x="75" y="128" font-size="12" fill="#1976D2" text-anchor="middle">Q</text>
+            <rect x="237" y="108" width="16" height="8" fill="#1976D2"/>
+            <text x="245" y="128" font-size="12" fill="#1976D2" text-anchor="middle">P</text>
+            <rect x="40" y="130" width="70" height="80" rx="8" fill="#fbfdff" stroke="#334155" stroke-width="2"/>
+            <text x="75" y="173" font-size="10" text-anchor="middle" fill="#334155">Ventricle</text>
+            <rect x="210" y="130" width="70" height="80" rx="8" fill="#fbfdff" stroke="#334155" stroke-width="2"/>
+            <text x="245" y="173" font-size="10" text-anchor="middle" fill="#334155">Ventricle</text>
+          </svg>`
+        },
+        options: [
+          { key: "A", en: "P and Q", zh: "P 及 Q" },
+          { key: "B", en: "P and R", zh: "P 及 R" },
+          { key: "C", en: "Q and S", zh: "Q 及 S" },
+          { key: "D", en: "R and S", zh: "R 及 S" }
+        ],
+        answer: "D",
+        hint_en: "Look for the valves positioned where blood leaves the ventricles and enters the aorta or pulmonary artery.",
+        hint_zh: "找出位於血液離開心室、進入主動脈或肺動脈位置的心瓣。",
+        explanation_en: "Valves R and S sit at the base of the pulmonary artery and aorta respectively — these are the semilunar valves. They close after the ventricles contract and push blood into the arteries, preventing blood from flowing backward into the ventricles as the ventricles relax. Valves P and Q sit between the atria and ventricles and instead prevent backflow from the ventricles into the atria.",
+        explanation_zh: "心瓣R及S分別位於肺動脈及主動脈的基部——它們是半月瓣。當心室收縮並把血液推入動脈後，這些瓣膜會關閉，防止血液在心室舒張時倒流回心室。心瓣P及Q則位於心房與心室之間，用以防止血液從心室倒流回心房。"
+      },
+      {
+        id: "hp-m2",
+        topic: "Human Physiology",
+        subtopic: "Digestion and absorption",
+        difficulty: "medium",
+        source: "hkdse-style",
+        stem_en: "Radioactively labelled fat molecules are introduced into the small intestine of a volunteer. Which of the following correctly shows the pathway by which radioactivity would reach the heart?",
+        stem_zh: "把帶放射性標記的脂肪分子引入一名志願者的小腸內。以下哪項正確顯示放射性到達心臟的路徑？",
+        options: [
+          { key: "A", en: "blood capillaries in villi → hepatic portal vein → liver → hepatic vein → vena cava → right atrium", zh: "絨毛的血液微血管 → 肝門靜脈 → 肝臟 → 肝靜脈 → 腔靜脈 → 右心房" },
+          { key: "B", en: "lacteals in villi → lymph vessels → vena cava → right atrium", zh: "絨毛的乳糜管 → 淋巴管 → 腔靜脈 → 右心房" },
+          { key: "C", en: "blood capillaries in villi → lymph vessels → vena cava → right atrium", zh: "絨毛的血液微血管 → 淋巴管 → 腔靜脈 → 右心房" },
+          { key: "D", en: "lacteals in villi → hepatic portal vein → liver → hepatic vein → vena cava → right atrium", zh: "絨毛的乳糜管 → 肝門靜脈 → 肝臟 → 肝靜脈 → 腔靜脈 → 右心房" }
+        ],
+        answer: "B",
+        hint_en: "Remember that digested fats are absorbed differently from amino acids and glucose — they don't travel via the hepatic portal vein.",
+        hint_zh: "記住消化後的脂肪吸收途徑與氨基酸及葡萄糖不同——脂肪不會經過肝門靜脈。",
+        explanation_en: "Digested fats are absorbed into the lacteals (lymphatic capillaries) inside the villi, not directly into blood capillaries. From there they travel through the lymphatic system before draining into a large vein and entering the vena cava, reaching the right atrium of the heart. This differs from glucose and amino acids, which are absorbed directly into blood capillaries and pass through the hepatic portal vein to the liver first.",
+        explanation_zh: "消化後的脂肪會被吸收進入絨毛內的乳糜管（淋巴微管），而非直接進入血液微血管。脂肪其後經淋巴系統運送，最終匯入一條大靜脈並進入腔靜脈，到達心臟的右心房。這與葡萄糖及氨基酸不同，後者會直接被血液微血管吸收，並先經肝門靜脈運送到肝臟。"
+      },
+      {
+        id: "hp-h2",
+        topic: "Human Physiology",
+        subtopic: "Nervous coordination",
+        difficulty: "hard",
+        source: "hkdse-style",
+        stem_en: "Botulinum toxin (Botox) prevents synaptic vesicles from fusing with the presynaptic membrane at the neuromuscular junction, blocking the release of neurotransmitter from the motor neurone ending. Which of the following processes would NOT occur after a neuromuscular junction has been treated with Botox?\n(1) binding of neurotransmitter to receptors on the muscle fibre membrane\n(2) release of neurotransmitter from the motor neurone ending\n(3) synthesis of neurotransmitter inside the motor neurone ending",
+        stem_zh: "肉毒桿菌毒素（Botox）會阻止突觸小泡與神經肌肉接頭處的突觸前膜融合，從而阻斷運動神經元末梢釋放神經遞質。以下哪項／哪些過程在神經肌肉接頭被Botox處理後將不會發生？\n(1) 神經遞質與肌肉纖維膜上受體的結合\n(2) 運動神經元末梢釋放神經遞質\n(3) 運動神經元末梢內神經遞質的合成",
+        options: [
+          { key: "A", en: "(1) and (2) only", zh: "只有 (1) 及 (2)" },
+          { key: "B", en: "(1) and (3) only", zh: "只有 (1) 及 (3)" },
+          { key: "C", en: "(2) and (3) only", zh: "只有 (2) 及 (3)" },
+          { key: "D", en: "(1), (2) and (3)", zh: "(1)、(2) 及 (3)" }
+        ],
+        answer: "A",
+        hint_en: "Botox blocks one specific step — work out which steps happen before that block (and are unaffected) and which happen after it (and would fail).",
+        hint_zh: "Botox只阻斷一個特定步驟——想一想哪些步驟發生在該阻斷點之前（不受影響），哪些發生在之後（會失敗）。",
+        explanation_en: "Botox specifically blocks vesicle fusion with the membrane, preventing neurotransmitter release (2). Since no neurotransmitter is released, it cannot bind to receptors on the muscle fibre membrane either (1). However, the synthesis of neurotransmitter (3) happens earlier inside the neurone, before the vesicle fusion step, so it is unaffected by Botox and still occurs. The correct answer is (1) and (2) only.",
+        explanation_zh: "Botox特別阻斷突觸小泡與細胞膜的融合，令神經遞質無法釋放（2）。由於沒有神經遞質釋放，它亦無法與肌肉纖維膜上的受體結合（1）。然而，神經遞質的合成（3）在神經元內部較早發生，發生於小泡融合步驟之前，因此不受Botox影響，仍會進行。正確答案是只有(1)及(2)。"
       }
     ];
 
