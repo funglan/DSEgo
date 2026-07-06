@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HKDSE Biology Portal</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --bg-soft: #eef7f5;
+      --card: #ffffff;
+      --primary: #0f766e;
+      --primary-dark: #0b5d57;
+      --primary-soft: #dff5f1;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #dbe3ea;
+      --danger: #b91c1c;
+      --warning: #92400e;
+      --warning-bg: #fff7ed;
+      --success: #166534;
+      --success-bg: #ecfdf5;
+      --shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, var(--bg-soft) 0%, var(--bg) 100%);
+      color: var(--text);
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .brand {
+      font-size: 28px;
+      font-weight: 800;
+      color: #12324a;
+    }
+
+    .account-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .account-pill {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 10px 14px;
+      box-shadow: var(--shadow);
+      font-size: 14px;
+      color: #334155;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      align-items: stretch;
+      margin-top: 12px;
+    }
+
+    .hero-card,
+    .panel,
+    .auth-card,
+    .quiz-card,
+    .info-card,
+    .profile-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .hero-card { padding: 36px; }
+
+    .hero-card h1 {
+      margin: 0 0 16px;
+      font-size: 42px;
+      line-height: 1.1;
+      color: #12324a;
+    }
+
+    .hero-card p {
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--muted);
+      margin: 0 0 18px;
+      max-width: 60ch;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .badge {
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .side-panel {
+      display: grid;
+      gap: 24px;
+    }
+
+    .panel { padding: 24px; }
+
+    .panel h2 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      color: #12324a;
+    }
+
+    .panel p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 28px;
+    }
+
+    .auth-card,
+    .quiz-card,
+    .info-card,
+    .profile-card {
+      padding: 28px;
+    }
+
+    .section-title {
+      margin: 0 0 8px;
+      font-size: 26px;
+      color: #12324a;
+    }
+
+    .section-desc {
+      margin: 0 0 20px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .mode-switch {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .mode-btn {
+      border: 1px solid var(--border);
+      background: #f9fbfc;
+      padding: 10px 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .mode-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    form { display: grid; gap: 14px; }
+
+    label {
+      font-size: 14px;
+      font-weight: 700;
+      color: #334155;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      font-size: 15px;
+      outline: none;
+      background: #fff;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 12px;
+      padding: 13px 16px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover { background: var(--primary-dark); }
+
+    .btn-secondary {
+      background: #e8eef4;
+      color: #1f2937;
+    }
+
+    .btn-secondary:hover { background: #dce6ef; }
+
+    .btn-danger {
+      background: #fee2e2;
+      color: var(--danger);
+    }
+
+    .btn-danger:hover { background: #fecaca; }
+
+    .button-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .status-box {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      font-size: 14px;
+      line-height: 1.6;
+      white-space: pre-line;
+    }
+
+    .notice {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      font-size: 14px;
+      line-height: 1.6;
+      border: 1px solid transparent;
+    }
+
+    .notice-warning {
+      background: var(--warning-bg);
+      color: var(--warning);
+      border-color: #fed7aa;
+    }
+
+    .notice-success {
+      background: var(--success-bg);
+      color: var(--success);
+      border-color: #a7f3d0;
+    }
+
+    .user-box {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 14px;
+      background: #effaf7;
+      border: 1px solid #cceee7;
+    }
+
+    .user-box strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--primary-dark);
+    }
+
+    .user-meta {
+      color: #334155;
+      font-size: 14px;
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .feature-item {
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+    }
+
+    .feature-item strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #12324a;
+    }
+
+    .link-btn {
+      background: none;
+      border: none;
+      color: var(--primary);
+      padding: 0;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+      text-align: left;
+    }
+
+    .link-btn:hover { text-decoration: underline; }
+
+    .footer-note {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+      line-height: 1.7;
+    }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 900px) {
+      .hero, .grid, .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .account-area {
+        justify-content: flex-start;
+      }
+
+      .hero-card h1 {
+        font-size: 34px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <div class="brand">HKDSE Biology Portal</div>
+      <div class="account-area">
+        <div class="account-pill" id="topRightUser">Not logged in</div>
+        <button class="btn btn-secondary hidden" id="topEditProfileBtn" type="button">Edit Profile</button>
+        <button class="btn btn-danger hidden" id="topLogoutBtn" type="button">Logout</button>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="hero-card">
+        <h1>HKDSE Biology Practice Platform</h1>
+        <p>
+          Public registration is now restricted to student accounts only. Teacher access is controlled by a fixed teacher email so students cannot create teacher accounts and contaminate the database.
+        </p>
+        <p>
+          This version keeps email verification, password reset, top-right account display, and profile editing, while making teacher access more secure.
+        </p>
+        <div class="hero-badges">
+          <span class="badge">Student-only Register</span>
+          <span class="badge">Teacher Email Restricted</span>
+          <span class="badge">Email Verification</span>
+          <span class="badge">Firestore Protected</span>
+        </div>
+      </div>
+
+      <div class="side-panel">
+        <div class="panel">
+          <h2>Teacher control</h2>
+          <p>
+            Only one designated teacher email can be treated as teacher inside the system. All public registrations are stored as students.
+          </p>
+        </div>
+
+        <div class="panel">
+          <h2>Database safety</h2>
+          <p>
+            Firestore rules should protect teacher-only collections so students cannot upload or modify question-bank data from the client side.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="auth-card">
+        <h2 class="section-title">Account access</h2>
+        <p class="section-desc">
+          Students can register with name, class, email, and password. Teacher role is not open for public registration.
+        </p>
+
+        <div class="mode-switch">
+          <button class="mode-btn active" id="registerModeBtn" type="button">Register</button>
+          <button class="mode-btn" id="loginModeBtn" type="button">Login</button>
+        </div>
+
+        <form id="authForm">
+          <div id="registerFields">
+            <div class="two-col">
+              <div>
+                <label for="studentName">Student name / Full name</label>
+                <input id="studentName" type="text" placeholder="e.g. Chan Tai Man" />
+              </div>
+              <div>
+                <label for="schoolClass">Class / Group</label>
+                <input id="schoolClass" type="text" placeholder="e.g. 6A / Tutorial Group B" />
+              </div>
+            </div>
+
+            <div>
+              <label for="languagePref">Language preference</label>
+              <select id="languagePref">
+                <option value="en">English</option>
+                <option value="zh-Hant">繁體中文</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="Enter your email" required />
+          </div>
+
+          <div>
+            <label for="password">Password</label>
+            <input id="password" type="password" placeholder="Minimum 6 characters" required />
+          </div>
+
+          <div class="button-row">
+            <button class="btn btn-primary" id="authSubmitBtn" type="submit">Create student account</button>
+            <button class="btn btn-secondary" id="clearBtn" type="button">Clear</button>
+          </div>
+        </form>
+
+        <div class="button-row" style="margin-top: 12px;">
+          <button class="link-btn" id="forgotPasswordBtn" type="button">Forgot password?</button>
+          <button class="link-btn hidden" id="resendVerificationBtn" type="button">Resend verification email</button>
+          <button class="link-btn hidden" id="refreshVerificationBtn" type="button">Refresh verification status</button>
+        </div>
+
+        <div class="status-box" id="authStatus">System ready. Student registration only.</div>
+
+        <div class="notice notice-warning hidden" id="verificationNotice">
+          Your email is not verified yet. Please check your mailbox and click the verification link.
+        </div>
+
+        <div class="notice notice-success hidden" id="verifiedNotice">
+          Your email has been verified successfully.
+        </div>
+
+        <div class="user-box hidden" id="userBox">
+          <strong>Signed-in user</strong>
+          <div class="user-meta" id="userMeta"></div>
+        </div>
+      </div>
+
+      <div class="quiz-card">
+        <h2 class="section-title">Quiz setup</h2>
+        <p class="section-desc">
+          Students can save quiz setup preferences. Teacher-only data management should be protected in separate collections.
+        </p>
+
+        <form id="quizForm">
+          <div class="two-col">
+            <div>
+              <label for="quizMode">Portal mode</label>
+              <select id="quizMode">
+                <option value="student">Student mode</option>
+                <option value="teacher">Teacher mode</option>
+              </select>
+            </div>
+            <div>
+              <label for="topic">Topic</label>
+              <select id="topic">
+                <option value="Cells and Molecules">Cells and Molecules</option>
+                <option value="Genetics and Evolution">Genetics and Evolution</option>
+                <option value="Organisms and Environment">Organisms and Environment</option>
+                <option value="Health and Diseases">Health and Diseases</option>
+                <option value="Human Physiology">Human Physiology</option>
+                <option value="All Topics">All Topics</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="two-col">
+            <div>
+              <label for="difficulty">Difficulty</label>
+              <select id="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium" selected>Medium</option>
+                <option value="hard">Hard</option>
+                <option value="mixed">Mixed</option>
+              </select>
+            </div>
+            <div>
+              <label for="questionCount">Number of questions</label>
+              <select id="questionCount">
+                <option value="10">10</option>
+                <option value="20" selected>20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="two-col">
+            <div>
+              <label for="quizLanguage">Question language</label>
+              <select id="quizLanguage">
+                <option value="en">English</option>
+                <option value="zh-Hant">繁體中文</option>
+                <option value="bilingual">Bilingual</option>
+              </select>
+            </div>
+            <div>
+              <label for="timerMode">Timer</label>
+              <select id="timerMode">
+                <option value="on">On</option>
+                <option value="off">Off</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="notes">Teacher / student note</label>
+            <input id="notes" type="text" placeholder="Optional note for this quiz setup" />
+          </div>
+
+          <div class="button-row">
+            <button class="btn btn-primary" type="submit">Save quiz setup</button>
+            <button class="btn btn-secondary" type="button" id="previewBtn">Preview selection</button>
+          </div>
+        </form>
+
+        <div class="status-box" id="quizStatus">No quiz setup saved yet.</div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="profile-card hidden" id="profileCard">
+        <h2 class="section-title">Edit profile</h2>
+        <p class="section-desc">
+          Update your account name and profile information.
+        </p>
+
+        <form id="profileForm">
+          <div class="two-col">
+            <div>
+              <label for="profileName">Display name</label>
+              <input id="profileName" type="text" placeholder="Enter display name" />
+            </div>
+            <div>
+              <label for="profileClass">Class / Group</label>
+              <input id="profileClass" type="text" placeholder="e.g. 6A" />
+            </div>
+          </div>
+
+          <div>
+            <label for="profileLanguage">Language preference</label>
+            <select id="profileLanguage">
+              <option value="en">English</option>
+              <option value="zh-Hant">繁體中文</option>
+            </select>
+          </div>
+
+          <div class="button-row">
+            <button class="btn btn-primary" type="submit">Save profile changes</button>
+            <button class="btn btn-secondary" type="button" id="closeProfileBtn">Close</button>
+          </div>
+        </form>
+
+        <div class="status-box" id="profileStatus">Profile editor ready.</div>
+      </div>
+
+      <div class="info-card">
+        <h2 class="section-title">Access model</h2>
+        <p class="section-desc">
+          This version separates public student registration from teacher-only administration.
+        </p>
+        <div class="feature-list">
+          <div class="feature-item">
+            <strong>Student registration only</strong>
+            All new public accounts are created as student accounts.
+          </div>
+          <div class="feature-item">
+            <strong>Teacher by email only</strong>
+            Only the specified teacher email is treated as teacher in the UI and rules.
+          </div>
+          <div class="feature-item">
+            <strong>Rules protect data</strong>
+            Teacher-only collections should not accept writes from students.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <p class="footer-note">
+      Version 3 restricts public registration to students only and reserves teacher access for your designated email.
+    </p>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      onAuthStateChanged,
+      signOut,
+      sendEmailVerification,
+      sendPasswordResetEmail,
+      updateProfile,
+      reload
+    } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+    import {
+      getFirestore,
+      doc,
+      setDoc,
+      getDoc,
+      addDoc,
+      collection,
+      updateDoc,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCtylMhKBts7fKC9T0hm_aoCkELfHptOD0",
+      authDomain: "hkdse-biology-portal-chf.firebaseapp.com",
+      projectId: "hkdse-biology-portal-chf",
+      storageBucket: "hkdse-biology-portal-chf.firebasestorage.app",
+      messagingSenderId: "454323357835",
+      appId: "1:454323357835:web:bc120f05cf8fdfcb89ac8e",
+      measurementId: "G-D3G7J3TV5K"
+    };
+
+    const TEACHER_EMAIL = "hiufungchan366@gmail.com";
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    let authMode = "register";
+
+    const registerModeBtn = document.getElementById("registerModeBtn");
+    const loginModeBtn = document.getElementById("loginModeBtn");
+    const authForm = document.getElementById("authForm");
+    const authSubmitBtn = document.getElementById("authSubmitBtn");
+    const clearBtn = document.getElementById("clearBtn");
+    const registerFields = document.getElementById("registerFields");
+    const forgotPasswordBtn = document.getElementById("forgotPasswordBtn");
+    const resendVerificationBtn = document.getElementById("resendVerificationBtn");
+    const refreshVerificationBtn = document.getElementById("refreshVerificationBtn");
+
+    const authStatus = document.getElementById("authStatus");
+    const verificationNotice = document.getElementById("verificationNotice");
+    const verifiedNotice = document.getElementById("verifiedNotice");
+    const userBox = document.getElementById("userBox");
+    const userMeta = document.getElementById("userMeta");
+
+    const topRightUser = document.getElementById("topRightUser");
+    const topEditProfileBtn = document.getElementById("topEditProfileBtn");
+    const topLogoutBtn = document.getElementById("topLogoutBtn");
+
+    const profileCard = document.getElementById("profileCard");
+    const profileForm = document.getElementById("profileForm");
+    const profileStatus = document.getElementById("profileStatus");
+    const closeProfileBtn = document.getElementById("closeProfileBtn");
+
+    const studentNameInput = document.getElementById("studentName");
+    const schoolClassInput = document.getElementById("schoolClass");
+    const languagePrefInput = document.getElementById("languagePref");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+
+    const profileNameInput = document.getElementById("profileName");
+    const profileClassInput = document.getElementById("profileClass");
+    const profileLanguageInput = document.getElementById("profileLanguage");
+
+    const quizForm = document.getElementById("quizForm");
+    const quizStatus = document.getElementById("quizStatus");
+    const previewBtn = document.getElementById("previewBtn");
+    const quizModeInput = document.getElementById("quizMode");
+    const topicInput = document.getElementById("topic");
+    const difficultyInput = document.getElementById("difficulty");
+    const questionCountInput = document.getElementById("questionCount");
+    const quizLanguageInput = document.getElementById("quizLanguage");
+    const timerModeInput = document.getElementById("timerMode");
+    const notesInput = document.getElementById("notes");
+
+    function getRoleFromEmail(email) {
+      if (!email) return "student";
+      return email.toLowerCase() === TEACHER_EMAIL.toLowerCase() ? "teacher" : "student";
+    }
+
+    function setAuthMode(mode) {
+      authMode = mode;
+
+      if (mode === "register") {
+        registerModeBtn.classList.add("active");
+        loginModeBtn.classList.remove("active");
+        registerFields.classList.remove("hidden");
+        authSubmitBtn.textContent = "Create student account";
+        authStatus.textContent = "Public registration is for student accounts only.";
+      } else {
+        loginModeBtn.classList.add("active");
+        registerModeBtn.classList.remove("active");
+        registerFields.classList.add("hidden");
+        authSubmitBtn.textContent = "Login";
+        authStatus.textContent = "Login with your registered email and password.";
+      }
+    }
+
+    function updateVerificationUI(user) {
+      verificationNotice.classList.add("hidden");
+      verifiedNotice.classList.add("hidden");
+      resendVerificationBtn.classList.add("hidden");
+      refreshVerificationBtn.classList.add("hidden");
+
+      if (!user) return;
+
+      if (user.emailVerified) {
+        verifiedNotice.classList.remove("hidden");
+      } else {
+        verificationNotice.classList.remove("hidden");
+        resendVerificationBtn.classList.remove("hidden");
+        refreshVerificationBtn.classList.remove("hidden");
+      }
+    }
+
+    async function loadUserProfile(uid) {
+      const userRef = doc(db, "users", uid);
+      const snap = await getDoc(userRef);
+      if (snap.exists()) return snap.data();
+      return null;
+    }
+
+    function fillProfileForm(profile, user) {
+      profileNameInput.value = profile?.displayName || user?.displayName || "";
+      profileClassInput.value = profile?.schoolClass || "";
+      profileLanguageInput.value = profile?.languagePref || "en";
+    }
+
+    function updateTopRight(user, profile) {
+      if (!user) {
+        topRightUser.textContent = "Not logged in";
+        topEditProfileBtn.classList.add("hidden");
+        topLogoutBtn.classList.add("hidden");
+        return;
+      }
+
+      const displayName = profile?.displayName || user.displayName || "User";
+      const role = profile?.role || getRoleFromEmail(user.email);
+      topRightUser.textContent = `${displayName} (${role})`;
+      topEditProfileBtn.classList.remove("hidden");
+      topLogoutBtn.classList.remove("hidden");
+    }
+
+    function updateUserBox(user, profile) {
+      if (!user) {
+        userBox.classList.add("hidden");
+        userMeta.textContent = "";
+        return;
+      }
+
+      userBox.classList.remove("hidden");
+      const displayName = profile?.displayName || user.displayName || "N/A";
+      const role = profile?.role || getRoleFromEmail(user.email);
+      const schoolClass = profile?.schoolClass || "N/A";
+      const languagePref = profile?.languagePref || "N/A";
+
+      userMeta.textContent =
+        "Name: " + displayName + "\n" +
+        "Email: " + (user.email || "N/A") + "\n" +
+        "Role: " + role + "\n" +
+        "Class: " + schoolClass + "\n" +
+        "Language: " + languagePref + "\n" +
+        "Email verified: " + (user.emailVerified ? "Yes" : "No");
+    }
+
+    async function syncUserInterface(user) {
+      if (!user) {
+        updateTopRight(null, null);
+        updateUserBox(null, null);
+        updateVerificationUI(null);
+        profileCard.classList.add("hidden");
+        return;
+      }
+
+      const profile = await loadUserProfile(user.uid);
+      fillProfileForm(profile, user);
+      updateTopRight(user, profile);
+      updateUserBox(user, profile);
+      updateVerificationUI(user);
+    }
+
+    registerModeBtn.addEventListener("click", () => setAuthMode("register"));
+    loginModeBtn.addEventListener("click", () => setAuthMode("login"));
+
+    clearBtn.addEventListener("click", () => {
+      authForm.reset();
+      authStatus.textContent = "Form cleared.";
+    });
+
+    authForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const email = emailInput.value.trim();
+      const password = passwordInput.value.trim();
+
+      if (!email || !password) {
+        authStatus.textContent = "Please enter both email and password.";
+        return;
+      }
+
+      try {
+        if (authMode === "register") {
+          const studentName = studentNameInput.value.trim();
+          const schoolClass = schoolClassInput.value.trim();
+          const languagePref = languagePrefInput.value;
+
+          if (!studentName) {
+            authStatus.textContent = "Please enter the student name / full name.";
+            return;
+          }
+
+          const detectedRole = getRoleFromEmail(email);
+
+          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+          const user = userCredential.user;
+
+          await updateProfile(user, {
+            displayName: studentName
+          });
+
+          await setDoc(doc(db, "users", user.uid), {
+            uid: user.uid,
+            displayName: studentName,
+            email,
+            role: detectedRole,
+            schoolClass,
+            languagePref,
+            emailVerified: false,
+            createdAt: serverTimestamp(),
+            updatedAt: serverTimestamp()
+          });
+
+          await sendEmailVerification(user);
+
+          authStatus.textContent =
+            detectedRole === "teacher"
+              ? "Teacher account created for the designated teacher email. Verification email sent."
+              : "Student account created successfully. Verification email has been sent.";
+        } else {
+          await signInWithEmailAndPassword(auth, email, password);
+          authStatus.textContent = "Login successful.";
+        }
+      } catch (error) {
+        authStatus.textContent = "Authentication error: " + error.message;
+      }
+    });
+
+    forgotPasswordBtn.addEventListener("click", async () => {
+      const email = emailInput.value.trim();
+      if (!email) {
+        authStatus.textContent = "Please enter your email first, then click Forgot password.";
+        return;
+      }
+
+      try {
+        await sendPasswordResetEmail(auth, email);
+        authStatus.textContent = "Password reset email has been sent. Please check your inbox.";
+      } catch (error) {
+        authStatus.textContent = "Password reset error: " + error.message;
+      }
+    });
+
+    resendVerificationBtn.addEventListener("click", async () => {
+      const user = auth.currentUser;
+      if (!user) {
+        authStatus.textContent = "Please login first.";
+        return;
+      }
+
+      try {
+        await sendEmailVerification(user);
+        authStatus.textContent = "Verification email sent again. Please check your inbox.";
+      } catch (error) {
+        authStatus.textContent = "Verification email error: " + error.message;
+      }
+    });
+
+    refreshVerificationBtn.addEventListener("click", async () => {
+      const user = auth.currentUser;
+      if (!user) {
+        authStatus.textContent = "Please login first.";
+        return;
+      }
+
+      try {
+        await reload(user);
+        const refreshedUser = auth.currentUser;
+
+        if (refreshedUser?.emailVerified) {
+          await updateDoc(doc(db, "users", refreshedUser.uid), {
+            emailVerified: true,
+            updatedAt: serverTimestamp()
+          });
+          authStatus.textContent = "Verification status refreshed. Your email is verified.";
+        } else {
+          authStatus.textContent = "Email is still not verified yet. Please check your email and click the link.";
+        }
+
+        await syncUserInterface(refreshedUser);
+      } catch (error) {
+        authStatus.textContent = "Refresh verification error: " + error.message;
+      }
+    });
+
+    onAuthStateChanged(auth, async (user) => {
+      await syncUserInterface(user);
+    });
+
+    topLogoutBtn.addEventListener("click", async () => {
+      try {
+        await signOut(auth);
+        authStatus.textContent = "Logged out successfully.";
+      } catch (error) {
+        authStatus.textContent = "Logout error: " + error.message;
+      }
+    });
+
+    topEditProfileBtn.addEventListener("click", () => {
+      profileCard.classList.remove("hidden");
+      profileStatus.textContent = "You can edit your profile here.";
+      profileCard.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    closeProfileBtn.addEventListener("click", () => {
+      profileCard.classList.add("hidden");
+      profileStatus.textContent = "Profile editor closed.";
+    });
+
+    profileForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const user = auth.currentUser;
+      if (!user) {
+        profileStatus.textContent = "Please login first.";
+        return;
+      }
+
+      const newName = profileNameInput.value.trim();
+      const newClass = profileClassInput.value.trim();
+      const newLanguage = profileLanguageInput.value;
+      const safeRole = getRoleFromEmail(user.email);
+
+      if (!newName) {
+        profileStatus.textContent = "Display name cannot be empty.";
+        return;
+      }
+
+      try {
+        await updateProfile(user, {
+          displayName: newName
+        });
+
+        await updateDoc(doc(db, "users", user.uid), {
+          displayName: newName,
+          role: safeRole,
+          schoolClass: newClass,
+          languagePref: newLanguage,
+          emailVerified: user.emailVerified,
+          updatedAt: serverTimestamp()
+        });
+
+        profileStatus.textContent = "Profile updated successfully.";
+        await syncUserInterface(auth.currentUser);
+      } catch (error) {
+        profileStatus.textContent = "Profile update error: " + error.message;
+      }
+    });
+
+    previewBtn.addEventListener("click", () => {
+      const previewText =
+        "Preview\n" +
+        "Mode: " + quizModeInput.value + "\n" +
+        "Topic: " + topicInput.value + "\n" +
+        "Difficulty: " + difficultyInput.value + "\n" +
+        "Questions: " + questionCountInput.value + "\n" +
+        "Language: " + quizLanguageInput.value + "\n" +
+        "Timer: " + timerModeInput.value + "\n" +
+        "Note: " + (notesInput.value.trim() || "None");
+
+      quizStatus.textContent = previewText;
+    });
+
+    quizForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const currentUser = auth.currentUser;
+      if (!currentUser) {
+        quizStatus.textContent = "Please login first before saving quiz setup.";
+        return;
+      }
+
+      const actualRole = getRoleFromEmail(currentUser.email);
+
+      const quizData = {
+        uid: currentUser.uid,
+        userEmail: currentUser.email || "",
+        role: actualRole,
+        portalMode: actualRole === "teacher" ? quizModeInput.value : "student",
+        topic: topicInput.value,
+        difficulty: difficultyInput.value,
+        questionCount: Number(questionCountInput.value),
+        quizLanguage: quizLanguageInput.value,
+        timerMode: timerModeInput.value,
+        notes: notesInput.value.trim(),
+        createdAt: serverTimestamp()
+      };
+
+      try {
+        await addDoc(collection(db, "quizSetups"), quizData);
+
+        quizStatus.textContent =
+          "Quiz setup saved successfully.\n" +
+          "Topic: " + quizData.topic + "\n" +
+          "Difficulty: " + quizData.difficulty + "\n" +
+          "Questions: " + quizData.questionCount;
+
+        quizForm.reset();
+        difficultyInput.value = "medium";
+        questionCountInput.value = "20";
+      } catch (error) {
+        quizStatus.textContent = "Error saving quiz setup: " + error.message;
+      }
+    });
+
+    authStatus.textContent = "Firebase connected. V3 student-only registration is ready.";
+  </script>
+</body>
+</html>

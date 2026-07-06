@@ -1,0 +1,2100 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HKDSE Biology Portal</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --bg-soft: #eef7f5;
+      --card: #ffffff;
+      --primary: #0f766e;
+      --primary-dark: #0b5d57;
+      --primary-soft: #dff5f1;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #dbe3ea;
+      --danger: #b91c1c;
+      --warning: #92400e;
+      --warning-bg: #fff7ed;
+      --success: #166534;
+      --success-bg: #ecfdf5;
+      --shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, var(--bg-soft) 0%, var(--bg) 100%);
+      color: var(--text);
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .brand {
+      font-size: 28px;
+      font-weight: 800;
+      color: #12324a;
+    }
+
+    .account-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .account-pill {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 10px 14px;
+      box-shadow: var(--shadow);
+      font-size: 14px;
+      color: #334155;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      align-items: stretch;
+      margin-top: 12px;
+    }
+
+    .hero-card,
+    .panel,
+    .auth-card,
+    .quiz-card,
+    .info-card,
+    .profile-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .hero-card {
+      padding: 36px;
+    }
+
+    .hero-card h1 {
+      margin: 0 0 16px;
+      font-size: 42px;
+      line-height: 1.1;
+      color: #12324a;
+    }
+
+    .hero-card p {
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--muted);
+      margin: 0 0 18px;
+      max-width: 60ch;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .badge {
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .side-panel {
+      display: grid;
+      gap: 24px;
+    }
+
+    .panel {
+      padding: 24px;
+    }
+
+    .panel h2 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      color: #12324a;
+    }
+
+    .panel p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 28px;
+    }
+
+    .auth-card,
+    .quiz-card,
+    .info-card,
+    .profile-card {
+      padding: 28px;
+    }
+
+    .section-title {
+      margin: 0 0 8px;
+      font-size: 26px;
+      color: #12324a;
+    }
+
+    .section-desc {
+      margin: 0 0 20px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .mode-switch {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .mode-btn {
+      border: 1px solid var(--border);
+      background: #f9fbfc;
+      padding: 10px 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .mode-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: 700;
+      color: #334155;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      font-size: 15px;
+      outline: none;
+      background: #fff;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 12px;
+      padding: 13px 16px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-secondary {
+      background: #e8eef4;
+      color: #1f2937;
+    }
+
+    .btn-secondary:hover {
+      background: #dce6ef;
+    }
+
+    .btn-danger {
+      background: #fee2e2;
+      color: var(--danger);
+    }
+
+    .btn-danger:hover {
+      background: #fecaca;
+    }
+
+    .btn-warning {
+      background: #fff7ed;
+      color: var(--warning);
+    }
+
+    .btn-warning:hover {
+      background: #ffedd5;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .status-box {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      font-size: 14px;
+      line-height: 1.6;
+      white-space: pre-line;
+    }
+
+    .notice {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      font-size: 14px;
+      line-height: 1.6;
+      border: 1px solid transparent;
+    }
+
+    .notice-warning {
+      background: var(--warning-bg);
+      color: var(--warning);
+      border-color: #fed7aa;
+    }
+
+    .notice-success {
+      background: var(--success-bg);
+      color: var(--success);
+      border-color: #a7f3d0;
+    }
+
+    .user-box {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 14px;
+      background: #effaf7;
+      border: 1px solid #cceee7;
+    }
+
+    .user-box strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--primary-dark);
+    }
+
+    .user-meta {
+      color: #334155;
+      font-size: 14px;
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .feature-item {
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+    }
+
+    .feature-item strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #12324a;
+    }
+
+    .link-btn {
+      background: none;
+      border: none;
+      color: var(--primary);
+      padding: 0;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+      text-align: left;
+    }
+
+    .link-btn:hover {
+      text-decoration: underline;
+    }
+
+    .footer-note {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+      line-height: 1.7;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .lang-switch {
+      display: flex;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .lang-btn {
+      border: none;
+      background: transparent;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #334155;
+      cursor: pointer;
+    }
+
+    .lang-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .google-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .divider-text {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .btn-google {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1f2937;
+      cursor: pointer;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .btn-google:hover {
+      background: #f8fafc;
+    }
+
+    .hint-text {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    .qbank-card {
+      grid-column: 1 / -1;
+    }
+
+    .question-block {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 18px;
+      background: #fbfdff;
+    }
+
+    .question-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .tag {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+    }
+
+    .tag.diff-easy { background: #ecfdf5; color: #166534; }
+    .tag.diff-medium { background: #fff7ed; color: #92400e; }
+    .tag.diff-hard { background: #fef2f2; color: #b91c1c; }
+
+    .question-stem {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+
+    .question-figure {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 14px;
+      text-align: center;
+    }
+
+    .question-figure figcaption {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .option-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      background: #ffffff;
+    }
+
+    .option-row.selected {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .option-row.correct-flag {
+      border-color: var(--success);
+      background: var(--success-bg);
+    }
+
+    .option-row.wrong-flag {
+      border-color: var(--danger);
+      background: #fef2f2;
+    }
+
+    .option-key {
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+
+    .feedback-line {
+      font-size: 14px;
+      font-weight: 600;
+      margin: 10px 0;
+    }
+
+    .feedback-line.correct { color: var(--success); }
+    .feedback-line.wrong { color: var(--danger); }
+
+    .hint-box {
+      background: var(--warning-bg);
+      color: var(--warning);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .reveal-toggle {
+      background: none;
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 13px;
+      cursor: pointer;
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+
+    .explanation-box {
+      margin-top: 10px;
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .question-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 12px;
+    }
+
+    .results-table th,
+    .results-table td {
+      border: 1px solid var(--border);
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    .results-table th {
+      background: var(--bg-soft);
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .grid,
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .account-area {
+        justify-content: flex-start;
+      }
+
+      .hero-card h1 {
+        font-size: 34px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <div class="brand">HKDSE Biology Portal</div>
+      <div class="account-area">
+        <div class="lang-switch" role="group" aria-label="Page language">
+          <button class="lang-btn active" id="langEnBtn" type="button">EN</button>
+          <button class="lang-btn" id="langZhBtn" type="button">中</button>
+        </div>
+        <div class="account-pill" id="topRightUser">Not logged in</div>
+        <button class="btn btn-secondary hidden" id="topEditProfileBtn" type="button">Edit Profile</button>
+        <button class="btn btn-danger hidden" id="topLogoutBtn" type="button">Logout</button>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="hero-card">
+        <h1>HKDSE Biology Practice Platform</h1>
+        <p>
+          This portal helps students practise Biology multiple-choice questions by topic, difficulty, and question count, while teachers can later manage questions and review results.
+        </p>
+        <p>
+          Version 2 now includes required student-name registration, email verification, password reset support, top-right account display, and profile editing tools.
+        </p>
+        <div class="hero-badges">
+          <span class="badge">Email Verification</span>
+          <span class="badge">Forgot Password</span>
+          <span class="badge">Edit Profile</span>
+          <span class="badge">Firestore Ready</span>
+        </div>
+      </div>
+
+      <div class="side-panel">
+        <div class="panel">
+          <h2>Account system</h2>
+          <p>
+            Users can register with their name, email, password, role, class, and language preference, then manage their profile after login.
+          </p>
+        </div>
+
+        <div class="panel">
+          <h2>Practice engine (demo)</h2>
+          <p>
+            A seed question bank is now connected: instant marking, an auto-shown hint on a wrong answer, and a hidden answer/explanation panel you open when you need it.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="auth-card">
+        <h2 class="section-title">Account access</h2>
+        <p class="section-desc">
+          Register or login with Email/Password. Students should enter their real name so teachers can later identify records clearly.
+        </p>
+
+        <div class="mode-switch">
+          <button class="mode-btn active" id="registerModeBtn" type="button">Register</button>
+          <button class="mode-btn" id="loginModeBtn" type="button">Login</button>
+        </div>
+
+        <form id="authForm">
+          <div id="registerFields">
+            <div class="two-col">
+              <div>
+                <label for="studentName">Student name / Full name</label>
+                <input id="studentName" type="text" placeholder="e.g. Chan Tai Man" />
+              </div>
+              <div>
+                <label for="userRole">Role</label>
+                <select id="userRole">
+                  <option value="student">Student</option>
+                  <option value="teacher">Teacher</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="two-col">
+              <div>
+                <label for="schoolClass">Class / Group</label>
+                <input id="schoolClass" type="text" placeholder="e.g. 6A / Tutorial Group B" />
+              </div>
+              <div>
+                <label for="languagePref">Language preference</label>
+                <select id="languagePref">
+                  <option value="en">English</option>
+                  <option value="zh-Hant">繁體中文</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="Enter your email" required />
+          </div>
+
+          <div>
+            <label for="password">Password</label>
+            <input id="password" type="password" placeholder="Minimum 6 characters" required />
+          </div>
+
+          <div class="button-row">
+            <button class="btn btn-primary" id="authSubmitBtn" type="submit">Create account</button>
+            <button class="btn btn-secondary" id="clearBtn" type="button">Clear</button>
+          </div>
+        </form>
+
+        <div class="button-row" style="margin-top: 12px;">
+          <button class="link-btn" id="forgotPasswordBtn" type="button">Forgot password?</button>
+          <button class="link-btn hidden" id="resendVerificationBtn" type="button">Resend verification email</button>
+          <button class="link-btn hidden" id="refreshVerificationBtn" type="button">Refresh verification status</button>
+        </div>
+
+        <div class="google-row">
+          <span class="divider-text">or</span>
+          <button class="btn btn-google" id="googleSignInBtn" type="button">
+            <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.9 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 8 3l6-6C34.5 5.1 29.5 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21 21-9.4 21-21c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 15.9 18.9 13 24 13c3.1 0 5.8 1.1 8 3l6-6C34.5 5.1 29.5 3 24 3 16.3 3 9.6 7.4 6.3 14.7z"/><path fill="#4CAF50" d="M24 45c5.3 0 10.1-2 13.7-5.4l-6.3-5.3C29.4 35.9 26.8 37 24 37c-5.3 0-9.7-3.4-11.3-8.1l-6.5 5C9.6 40.6 16.3 45 24 45z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.3 5.7l6.3 5.3C40.9 36.5 45 30.9 45 24c0-1.2-.1-2.4-.4-3.5z"/></svg>
+            Continue with Google
+          </button>
+        </div>
+        <p class="hint-text">Teachers and students both sign in with their Gmail account. Your role is set on first sign-in and can be changed by an admin later.</p>
+
+        <div class="status-box" id="authStatus">System ready. Please register or login.</div>
+
+        <div class="notice notice-warning hidden" id="verificationNotice">
+          Your email is not verified yet. Please check your mailbox and click the verification link.
+        </div>
+
+        <div class="notice notice-success hidden" id="verifiedNotice">
+          Your email has been verified successfully.
+        </div>
+
+        <div class="user-box hidden" id="userBox">
+          <strong>Signed-in user</strong>
+          <div class="user-meta" id="userMeta"></div>
+        </div>
+      </div>
+
+      <div class="quiz-card">
+        <h2 class="section-title">Quiz setup</h2>
+        <p class="section-desc">
+          Choose the topic, difficulty, and number of questions for the next Biology practice session.
+        </p>
+
+        <form id="quizForm">
+          <div class="two-col">
+            <div>
+              <label for="quizMode">Portal mode</label>
+              <select id="quizMode">
+                <option value="student">Student mode</option>
+                <option value="teacher">Teacher mode</option>
+              </select>
+            </div>
+            <div>
+              <label for="topic">Topic</label>
+              <select id="topic">
+                <option value="Cells and Molecules">Cells and Molecules</option>
+                <option value="Genetics and Evolution">Genetics and Evolution</option>
+                <option value="Organisms and Environment">Organisms and Environment</option>
+                <option value="Health and Diseases">Health and Diseases</option>
+                <option value="Human Physiology">Human Physiology</option>
+                <option value="All Topics">All Topics</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="two-col">
+            <div>
+              <label for="difficulty">Difficulty</label>
+              <select id="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium" selected>Medium</option>
+                <option value="hard">Hard</option>
+                <option value="mixed">Mixed</option>
+              </select>
+            </div>
+            <div>
+              <label for="questionCount">Number of questions</label>
+              <select id="questionCount">
+                <option value="10">10</option>
+                <option value="20" selected>20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="two-col">
+            <div>
+              <label for="quizLanguage">Question language</label>
+              <select id="quizLanguage">
+                <option value="en">English</option>
+                <option value="zh-Hant">繁體中文</option>
+                <option value="bilingual">Bilingual</option>
+              </select>
+            </div>
+            <div>
+              <label for="timerMode">Timer</label>
+              <select id="timerMode">
+                <option value="on">On</option>
+                <option value="off">Off</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="notes">Teacher / student note</label>
+            <input id="notes" type="text" placeholder="Optional note for this quiz setup" />
+          </div>
+
+          <div class="button-row">
+            <button class="btn btn-primary" type="submit">Save quiz setup</button>
+            <button class="btn btn-secondary" type="button" id="previewBtn">Preview selection</button>
+          </div>
+        </form>
+
+        <div class="status-box" id="quizStatus">No quiz setup saved yet.</div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="qbank-card panel hidden" id="practiceCard">
+        <h2 class="section-title" data-en="Practice session" data-zh="練習題目">Practice session</h2>
+        <p class="section-desc" id="practiceProgress"></p>
+        <div id="questionMount"></div>
+        <div class="status-box hidden" id="quizSummary"></div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="qbank-card panel hidden" id="teacherDashboardCard">
+        <h2 class="section-title" data-en="Teacher dashboard" data-zh="教師後台">Teacher dashboard</h2>
+        <p class="section-desc" data-en="Review every student's answer records: topic, chosen options, and percentage correct." data-zh="查看所有學生的作答記錄：題目主題、所選答案及正確率。">
+          Review every student's answer records: topic, chosen options, and percentage correct.
+        </p>
+        <div class="button-row">
+          <button class="btn btn-primary" id="loadResultsBtn" type="button" data-en="Load results" data-zh="載入記錄">Load results</button>
+        </div>
+        <div id="resultsMount"></div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="profile-card hidden" id="profileCard">
+        <h2 class="section-title">Edit profile</h2>
+        <p class="section-desc">
+          Update the account name and profile information shown on the website.
+        </p>
+
+        <form id="profileForm">
+          <div class="two-col">
+            <div>
+              <label for="profileName">Display name</label>
+              <input id="profileName" type="text" placeholder="Enter display name" />
+            </div>
+            <div>
+              <label for="profileRole">Role</label>
+              <select id="profileRole">
+                <option value="student">Student</option>
+                <option value="teacher">Teacher</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="two-col">
+            <div>
+              <label for="profileClass">Class / Group</label>
+              <input id="profileClass" type="text" placeholder="e.g. 6A" />
+            </div>
+            <div>
+              <label for="profileLanguage">Language preference</label>
+              <select id="profileLanguage">
+                <option value="en">English</option>
+                <option value="zh-Hant">繁體中文</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="button-row">
+            <button class="btn btn-primary" type="submit">Save profile changes</button>
+            <button class="btn btn-secondary" type="button" id="closeProfileBtn">Close</button>
+          </div>
+        </form>
+
+        <div class="status-box" id="profileStatus">Profile editor ready.</div>
+      </div>
+
+      <div class="info-card">
+        <h2 class="section-title">Planned student experience</h2>
+        <p class="section-desc">
+          The student version will become a complete practice flow after the question bank is connected.
+        </p>
+        <div class="feature-list">
+          <div class="feature-item">
+            <strong>Student identity</strong>
+            The student name can now be recorded clearly at registration and edited later.
+          </div>
+          <div class="feature-item">
+            <strong>Account recovery</strong>
+            Verified email and password reset will help students recover access to their account.
+          </div>
+          <div class="feature-item">
+            <strong>Result tracking</strong>
+            Future quiz records can be linked to the correct student account and profile.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <p class="footer-note">
+      Version 2 now supports required student name registration, email verification, password reset, top-right account display, and profile editing.
+    </p>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      onAuthStateChanged,
+      signOut,
+      sendEmailVerification,
+      sendPasswordResetEmail,
+      updateProfile,
+      reload,
+      GoogleAuthProvider,
+      signInWithPopup
+    } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+    import {
+      getFirestore,
+      doc,
+      setDoc,
+      getDoc,
+      addDoc,
+      collection,
+      updateDoc,
+      serverTimestamp,
+      query,
+      getDocs
+    } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCtylMhKBts7fKC9T0hm_aoCkELfHptOD0",
+      authDomain: "hkdse-biology-portal-chf.firebaseapp.com",
+      projectId: "hkdse-biology-portal-chf",
+      storageBucket: "hkdse-biology-portal-chf.firebasestorage.app",
+      messagingSenderId: "454323357835",
+      appId: "1:454323357835:web:bc120f05cf8fdfcb89ac8e",
+      measurementId: "G-D3G7J3TV5K"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const googleProvider = new GoogleAuthProvider();
+
+    // ---------------------------------------------------------------
+    // Seed question bank (Phase 1 demo).
+    // Every item is either "original" (written for this platform) or
+    // "hkdse-style" (an original question modelled on a real HKDSE
+    // Biology paper's topic/format, NOT a verbatim copy of past-paper
+    // wording, to respect exam copyright). Real past-paper items should
+    // be added later by teachers through the upload tool once it ships.
+    // Schema mirrors the future Firestore "questions" collection and
+    // the Excel bulk-upload template, so this array can be swapped for
+    // a Firestore query without changing the rendering code below.
+    // ---------------------------------------------------------------
+    const QUESTION_BANK = [
+      {
+        id: "cm-e1",
+        topic: "Cells and Molecules",
+        subtopic: "Cell structure",
+        difficulty: "easy",
+        source: "original",
+        stem_en: "Which cell structure is mainly responsible for controlling the movement of substances into and out of the cell?",
+        stem_zh: "哪一個細胞結構主要負責控制物質進出細胞？",
+        options: [
+          { key: "A", en: "Cell wall", zh: "細胞壁" },
+          { key: "B", en: "Cell (plasma) membrane", zh: "細胞（質）膜" },
+          { key: "C", en: "Nucleus", zh: "細胞核" },
+          { key: "D", en: "Vacuole", zh: "液泡" }
+        ],
+        answer: "B",
+        hint_en: "Think about which structure is described as 'selectively permeable'.",
+        hint_zh: "想一想哪個結構被形容為「選擇性通透」。",
+        explanation_en: "The cell (plasma) membrane is selectively permeable and controls which substances enter or leave the cell by diffusion, osmosis and active transport. The cell wall provides support but does not control transport in animal-type detail; the nucleus controls gene expression; the vacuole stores substances.",
+        explanation_zh: "細胞（質）膜具有選擇性通透性，透過擴散、滲透及主動運輸控制物質進出細胞。細胞壁主要提供支持；細胞核控制基因表現；液泡則用作儲存物質。"
+      },
+      {
+        id: "cm-m1",
+        topic: "Cells and Molecules",
+        subtopic: "Enzymes",
+        difficulty: "medium",
+        source: "hkdse-style",
+        stem_en: "The graph below shows the rate of an enzyme-catalysed reaction at different temperatures. Which temperature is closest to the optimum temperature of this enzyme?",
+        stem_zh: "下圖顯示某酶催化反應的速率在不同溫度下的變化。以下哪個溫度最接近該酶的最適溫度？",
+        figure: {
+          caption_en: "Rate of reaction against temperature",
+          caption_zh: "反應速率對溫度的關係圖",
+          svg: `<svg viewBox="0 0 320 190" xmlns="http://www.w3.org/2000/svg">
+            <line x1="45" y1="20" x2="45" y2="160" stroke="#334155" stroke-width="2"/>
+            <line x1="45" y1="160" x2="300" y2="160" stroke="#334155" stroke-width="2"/>
+            <polyline points="45,150 80,120 115,68 150,40 185,58 220,100 255,140 290,155" fill="none" stroke="#0f766e" stroke-width="3"/>
+            <text x="10" y="35" font-size="11" fill="#334155">Rate</text>
+            <text x="150" y="182" font-size="11" fill="#334155" text-anchor="middle">Temperature (&#176;C)</text>
+            <text x="55" y="172" font-size="10" fill="#6b7280">0</text>
+            <text x="150" y="172" font-size="10" fill="#6b7280">40</text>
+            <text x="285" y="172" font-size="10" fill="#6b7280">70</text>
+            <line x1="150" y1="40" x2="150" y2="160" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 3"/>
+          </svg>`
+        },
+        options: [
+          { key: "A", en: "10 °C", zh: "10 °C" },
+          { key: "B", en: "25 °C", zh: "25 °C" },
+          { key: "C", en: "40 °C", zh: "40 °C" },
+          { key: "D", en: "65 °C", zh: "65 °C" }
+        ],
+        answer: "C",
+        hint_en: "The optimum temperature is where the curve reaches its highest point, not where it starts to fall.",
+        hint_zh: "最適溫度是曲線到達最高點的位置，而不是曲線開始下降的位置。",
+        explanation_en: "The peak of the curve (around 40°C) is the optimum temperature, where enzyme activity and reaction rate are highest. Below this, molecules move more slowly (fewer successful collisions); above this, the enzyme begins to denature, so the rate falls sharply.",
+        explanation_zh: "曲線的最高點（約40°C）即為最適溫度，此時酶的活性及反應速率最高。溫度較低時，分子運動較慢，有效碰撞較少；溫度過高則會令酶開始變性，令反應速率急劇下降。"
+      },
+      {
+        id: "cm-h1",
+        topic: "Cells and Molecules",
+        subtopic: "Osmosis and water potential",
+        difficulty: "hard",
+        source: "hkdse-style",
+        stem_en: "Potato strips of equal mass were placed in sucrose solutions of different concentrations for 30 minutes. The percentage change in mass was recorded, as shown below. What is the sucrose concentration closest to the water potential of the potato cells?",
+        stem_zh: "把質量相同的馬鈴薯條分別放入不同濃度的蔗糖溶液中30分鐘，並記錄其質量變化百分比（如下圖）。哪一個蔗糖濃度最接近馬鈴薯細胞的水勢？",
+        figure: {
+          caption_en: "Percentage change in mass against sucrose concentration",
+          caption_zh: "質量變化百分比對蔗糖濃度的關係圖",
+          svg: `<svg viewBox="0 0 320 190" xmlns="http://www.w3.org/2000/svg">
+            <line x1="45" y1="20" x2="45" y2="160" stroke="#334155" stroke-width="2"/>
+            <line x1="45" y1="95" x2="300" y2="95" stroke="#334155" stroke-width="2"/>
+            <rect x="55" y="55" width="24" height="40" fill="#0f766e"/>
+            <rect x="95" y="70" width="24" height="25" fill="#0f766e"/>
+            <rect x="135" y="90" width="24" height="6" fill="#94a3b8"/>
+            <rect x="175" y="95" width="24" height="30" fill="#b91c1c"/>
+            <rect x="215" y="95" width="24" height="45" fill="#b91c1c"/>
+            <rect x="255" y="95" width="24" height="55" fill="#b91c1c"/>
+            <text x="10" y="35" font-size="11" fill="#334155">% change</text>
+            <text x="150" y="182" font-size="11" fill="#334155" text-anchor="middle">Sucrose concentration (mol/dm&#179;)</text>
+            <text x="60" y="172" font-size="10" fill="#6b7280">0.0</text>
+            <text x="140" y="172" font-size="10" fill="#6b7280">0.4</text>
+            <text x="260" y="172" font-size="10" fill="#6b7280">1.0</text>
+          </svg>`
+        },
+        options: [
+          { key: "A", en: "0.0 mol/dm³", zh: "0.0 mol/dm³" },
+          { key: "B", en: "0.2 mol/dm³", zh: "0.2 mol/dm³" },
+          { key: "C", en: "0.4 mol/dm³", zh: "0.4 mol/dm³" },
+          { key: "D", en: "1.0 mol/dm³", zh: "1.0 mol/dm³" }
+        ],
+        answer: "C",
+        hint_en: "Look for the concentration where the bar shows (almost) zero change in mass — no net water movement means the solution's water potential matches the cells'.",
+        hint_zh: "找出質量變化（幾乎）為零的濃度——沒有淨水份移動即表示溶液的水勢與細胞相若。",
+        explanation_en: "At 0.4 mol/dm³ the mass barely changes, meaning water entered and left the potato cells at equal rates — the external solution's water potential equals that of the potato cells at that concentration. Below this concentration the strips gain mass (solution has higher water potential); above it they lose mass (solution has lower water potential).",
+        explanation_zh: "在0.4 mol/dm³時，質量幾乎沒有變化，代表水份進出馬鈴薯細胞的速率相等，即該濃度下外界溶液的水勢與馬鈴薯細胞相同。濃度低於此值時薯條質量增加（溶液水勢較高）；濃度高於此值時薯條質量減少（溶液水勢較低）。"
+      },
+      {
+        id: "ge-e1",
+        topic: "Genetics and Evolution",
+        subtopic: "Monohybrid inheritance",
+        difficulty: "easy",
+        source: "original",
+        stem_en: "In pea plants, tall (T) is dominant over short (t). A heterozygous tall plant (Tt) is crossed with a short plant (tt). What proportion of the offspring is expected to be tall?",
+        stem_zh: "在豌豆中，高莖（T）對矮莖（t）為顯性。把一株雜合高莖植物（Tt）與一株矮莖植物（tt）雜交，預期後代中高莖植物的比例是多少？",
+        options: [
+          { key: "A", en: "1/4", zh: "1/4" },
+          { key: "B", en: "1/2", zh: "1/2" },
+          { key: "C", en: "3/4", zh: "3/4" },
+          { key: "D", en: "All tall", zh: "全部高莖" }
+        ],
+        answer: "B",
+        hint_en: "Draw a Punnett square: Tt × tt gives Tt, Tt, tt, tt.",
+        hint_zh: "畫一個棋盤方格：Tt × tt 會得到 Tt, Tt, tt, tt。",
+        explanation_en: "Tt × tt produces offspring in the ratio 1 Tt : 1 tt, i.e. 2 out of 4 (1/2) are Tt (tall) and 1/2 are tt (short). This is a test cross used to determine the genotype of the tall parent.",
+        explanation_zh: "Tt × tt 產生的後代比例為 1 Tt : 1 tt，即4份中有2份（1/2）為Tt（高莖），另1/2為tt（矮莖）。這是用來測試高莖親本基因型的測交。"
+      },
+      {
+        id: "ge-m1",
+        topic: "Genetics and Evolution",
+        subtopic: "Natural selection",
+        difficulty: "medium",
+        source: "hkdse-style",
+        stem_en: "In a population of moths, a dark-coloured form and a light-coloured form exist. After nearby tree trunks became darkened by pollution, the proportion of dark moths in the population increased greatly over several generations. Which explanation best accounts for this change?",
+        stem_zh: "某種蛾的族群中同時存在深色及淺色兩種形態。當附近的樹幹因污染而變深色後，數個世代內族群中深色蛾的比例大幅上升。以下哪項解釋最能說明此變化？",
+        options: [
+          { key: "A", en: "Dark moths mutated into existence only after the pollution occurred.", zh: "深色蛾只在污染發生後才透過突變產生。" },
+          { key: "B", en: "Dark moths were better camouflaged, so fewer were eaten by predators, and they passed on their alleles more often.", zh: "深色蛾的偽裝效果較佳，被捕食者吃掉的機會較少，因此能把等位基因遺傳給下一代的機會較高。" },
+          { key: "C", en: "Light moths deliberately changed colour to survive.", zh: "淺色蛾為求生存而主動改變顏色。" },
+          { key: "D", en: "Pollution directly changed the moths' DNA within one generation.", zh: "污染在一代之內直接改變了蛾的DNA。" }
+        ],
+        answer: "B",
+        hint_en: "Natural selection acts on existing variation — it does not create new alleles on demand or let organisms 'choose' to change.",
+        hint_zh: "天擇作用於族群中已存在的變異——它不會按需要創造新的等位基因，生物亦不能「選擇」改變。",
+        explanation_en: "Both moth forms already existed before the pollution (variation was already present). After the environment changed, dark moths had a selective advantage (better camouflage against predators), survived and reproduced more successfully, so the dark allele became more frequent in the population — natural selection, not directed change.",
+        explanation_zh: "兩種形態的蛾在污染出現前已存在（族群中已有變異）。環境改變後，深色蛾因偽裝效果較佳而具有選擇優勢，存活和繁殖的機會較大，因此深色等位基因在族群中的頻率上升——這是天擇的結果，而非定向改變。"
+      },
+      {
+        id: "ge-h1",
+        topic: "Genetics and Evolution",
+        subtopic: "Pedigree analysis",
+        difficulty: "hard",
+        source: "hkdse-style",
+        stem_en: "A genetic disease is caused by a recessive allele on an autosome. Two unaffected parents have an affected daughter. Which statement must be true?",
+        stem_zh: "某遺傳病由一個位於常染色體上的隱性等位基因引致。一對表現正常的父母誕下一名患病女兒。以下哪項陳述必定正確？",
+        options: [
+          { key: "A", en: "Both parents must be heterozygous carriers.", zh: "父母雙方必定是雜合帶因者。" },
+          { key: "B", en: "The disease allele must be on the X chromosome.", zh: "致病等位基因必定位於X染色體上。" },
+          { key: "C", en: "The father must be affected.", zh: "父親必定患病。" },
+          { key: "D", en: "All sons of this couple will be affected.", zh: "這對夫婦所有兒子都必定患病。" }
+        ],
+        answer: "A",
+        hint_en: "For an unaffected couple to have an affected child from a recessive autosomal allele, both parents must carry one copy of the allele without showing the trait.",
+        hint_zh: "若一對表現正常的夫婦誕下患有隱性常染色體遺傳病的子女，父母雙方都必須帶有一個致病等位基因但不表現病徵。",
+        explanation_en: "Since the allele is recessive and autosomal, an affected child must be homozygous recessive (aa), receiving one recessive allele from each parent. Because the parents are unaffected, they must each be heterozygous carriers (Aa). Autosomal inheritance means it is not linked to the X chromosome, and sons are not automatically affected — each child (regardless of sex) has a 1/4 chance of being aa.",
+        explanation_zh: "由於該等位基因為隱性且位於常染色體上，患病子女必為隱性純合（aa），即分別從父母各獲得一個隱性等位基因。由於父母本身沒有病徵，他們必定是雜合帶因者（Aa）。常染色體遺傳與X染色體無關，兒子亦不會自動患病——每名子女（不論性別）患病的機率均為1/4。"
+      },
+      {
+        id: "oe-e1",
+        topic: "Organisms and Environment",
+        subtopic: "Food chains and trophic levels",
+        difficulty: "easy",
+        source: "original",
+        stem_en: "In the food chain: grass → grasshopper → frog → snake, which organism is the secondary consumer?",
+        stem_zh: "在食物鏈：草 → 蚱蜢 → 青蛙 → 蛇 中，哪一種生物是次級消費者？",
+        options: [
+          { key: "A", en: "Grass", zh: "草" },
+          { key: "B", en: "Grasshopper", zh: "蚱蜢" },
+          { key: "C", en: "Frog", zh: "青蛙" },
+          { key: "D", en: "Snake", zh: "蛇" }
+        ],
+        answer: "C",
+        hint_en: "Producer → primary consumer → secondary consumer → tertiary consumer. Count the position in the chain.",
+        hint_zh: "生產者 → 初級消費者 → 次級消費者 → 三級消費者。數一數在食物鏈中的位置。",
+        explanation_en: "Grass is the producer; the grasshopper (eats grass) is the primary consumer; the frog (eats the grasshopper) is the secondary consumer; the snake (eats the frog) is the tertiary consumer.",
+        explanation_zh: "草是生產者；蚱蜢（吃草）是初級消費者；青蛙（吃蚱蜢）是次級消費者；蛇（吃青蛙）是三級消費者。"
+      },
+      {
+        id: "oe-m1",
+        topic: "Organisms and Environment",
+        subtopic: "Population growth",
+        difficulty: "medium",
+        source: "hkdse-style",
+        stem_en: "The graph shows the growth of a yeast population in a closed culture over time. What does the flattening of the curve after point X most likely indicate?",
+        stem_zh: "下圖顯示酵母菌族群在封閉培養環境中隨時間的增長情況。曲線在X點後趨於平緩，最有可能顯示什麼？",
+        figure: {
+          caption_en: "Population size against time (closed culture)",
+          caption_zh: "族群大小對時間的關係圖（封閉培養）",
+          svg: `<svg viewBox="0 0 320 190" xmlns="http://www.w3.org/2000/svg">
+            <line x1="45" y1="20" x2="45" y2="160" stroke="#334155" stroke-width="2"/>
+            <line x1="45" y1="160" x2="300" y2="160" stroke="#334155" stroke-width="2"/>
+            <polyline points="45,155 90,148 130,110 165,60 200,38 235,33 270,32 295,32" fill="none" stroke="#0f766e" stroke-width="3"/>
+            <line x1="45" y1="33" x2="295" y2="33" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 3"/>
+            <text x="10" y="35" font-size="11" fill="#334155">Population</text>
+            <text x="150" y="182" font-size="11" fill="#334155" text-anchor="middle">Time</text>
+            <text x="255" y="27" font-size="10" fill="#6b7280">Carrying capacity (K)</text>
+            <circle cx="200" cy="38" r="3.5" fill="#b91c1c"/>
+            <text x="205" y="55" font-size="10" fill="#b91c1c">X</text>
+          </svg>`
+        },
+        options: [
+          { key: "A", en: "The yeast population is still growing exponentially.", zh: "酵母菌族群仍在指數增長。" },
+          { key: "B", en: "Limited nutrients and accumulated waste are limiting further growth as the population nears carrying capacity.", zh: "隨著族群接近承載量，有限的養分和累積的廢物限制了進一步增長。" },
+          { key: "C", en: "All yeast cells have died.", zh: "所有酵母菌細胞已經死亡。" },
+          { key: "D", en: "The temperature of the culture has decreased to 0 °C.", zh: "培養環境的溫度已下降至0°C。" }
+        ],
+        answer: "B",
+        hint_en: "A flattening curve in a closed culture usually points to limiting factors, not to the population stopping growth for no reason.",
+        hint_zh: "在封閉培養中曲線趨於平緩，通常反映有限制因素存在，而非族群無故停止增長。",
+        explanation_en: "In a closed culture, nutrients are finite and metabolic waste accumulates over time. As the population approaches the environment's carrying capacity (K), growth slows and the curve flattens due to these limiting factors — this is typical logistic (S-shaped) population growth.",
+        explanation_zh: "在封閉培養中，養分有限且代謝廢物會隨時間累積。當族群接近環境的承載量（K）時，這些限制因素會使增長減慢，曲線趨於平緩——這是典型的邏輯（S形）族群增長模式。"
+      },
+      {
+        id: "oe-h1",
+        topic: "Organisms and Environment",
+        subtopic: "Carbon cycle",
+        difficulty: "hard",
+        source: "original",
+        stem_en: "Which pair of processes both return carbon dioxide to the atmosphere in the carbon cycle?",
+        stem_zh: "在碳循環中，以下哪一組過程都能把二氧化碳釋放回大氣層？",
+        options: [
+          { key: "A", en: "Photosynthesis and respiration", zh: "光合作用及呼吸作用" },
+          { key: "B", en: "Respiration and combustion (burning fossil fuels)", zh: "呼吸作用及燃燒（燃燒化石燃料）" },
+          { key: "C", en: "Photosynthesis and decomposition", zh: "光合作用及分解作用" },
+          { key: "D", en: "Combustion and photosynthesis", zh: "燃燒及光合作用" }
+        ],
+        answer: "B",
+        hint_en: "Photosynthesis removes carbon dioxide from the atmosphere — it does not release it.",
+        hint_zh: "光合作用是從大氣中移除二氧化碳，而不是釋放二氧化碳。",
+        explanation_en: "Respiration (in living organisms) and combustion (burning fossil fuels or wood) both release carbon dioxide into the atmosphere. Photosynthesis does the opposite — it removes CO2 from the atmosphere to build organic molecules. Decomposition also releases CO2, but it is not paired correctly with photosynthesis in options A and C.",
+        explanation_zh: "呼吸作用（在生物體內）及燃燒（燃燒化石燃料或木材）均會把二氧化碳釋放到大氣中。光合作用則相反——它從大氣中移除二氧化碳以製造有機分子。分解作用同樣會釋放二氧化碳，但選項A及C中與光合作用的配對並不正確。"
+      },
+      {
+        id: "hd-e1",
+        topic: "Health and Diseases",
+        subtopic: "Transmission of diseases",
+        difficulty: "easy",
+        source: "original",
+        stem_en: "Which of the following diseases is mainly transmitted through direct contact with contaminated blood or body fluids?",
+        stem_zh: "以下哪種疾病主要透過直接接觸受污染的血液或體液傳播？",
+        options: [
+          { key: "A", en: "Common cold", zh: "普通感冒" },
+          { key: "B", en: "Hepatitis B", zh: "乙型肝炎" },
+          { key: "C", en: "Cholera", zh: "霍亂" },
+          { key: "D", en: "Influenza", zh: "流行性感冒" }
+        ],
+        answer: "B",
+        hint_en: "Think about which of these diseases is a blood-borne virus rather than airborne or waterborne.",
+        hint_zh: "想一想以下哪種疾病是經血液傳播的病毒，而非經空氣或水傳播。",
+        explanation_en: "Hepatitis B virus spreads mainly through contact with infected blood or body fluids (e.g. sharing needles, unprotected sex, mother to baby). The common cold and influenza spread through airborne droplets; cholera spreads through contaminated water/food.",
+        explanation_zh: "乙型肝炎病毒主要透過接觸受感染的血液或體液傳播（例如共用針筒、不安全性行為、母嬰傳播）。普通感冒及流感主要經飛沫（空氣）傳播；霍亂則主要經受污染的水或食物傳播。"
+      },
+      {
+        id: "hd-m1",
+        topic: "Health and Diseases",
+        subtopic: "Antibiotic resistance",
+        difficulty: "medium",
+        source: "hkdse-style",
+        stem_en: "A patient stopped taking a course of antibiotics as soon as symptoms disappeared, instead of completing the full course. Why does this increase the risk of antibiotic-resistant bacteria developing?",
+        stem_zh: "某病人在病徵消失後便立即停止服用抗生素，沒有完成整個療程。為什麼這會增加產生抗藥性細菌的風險？",
+        options: [
+          { key: "A", en: "It kills all bacteria instantly, leaving none to develop resistance.", zh: "這會立即殺死所有細菌，令沒有細菌能產生抗藥性。" },
+          { key: "B", en: "The more resistant bacteria that survive the incomplete course can multiply and pass on resistance alleles.", zh: "在未完成療程下存活的較具抗藥性細菌能夠繁殖，並把抗藥基因傳給下一代。" },
+          { key: "C", en: "Stopping antibiotics early causes bacteria to mutate into a completely new species.", zh: "提早停止服用抗生素會令細菌突變成一個全新的物種。" },
+          { key: "D", en: "Antibiotics have no effect on bacterial populations either way.", zh: "抗生素無論如何都不會影響細菌族群。" }
+        ],
+        answer: "B",
+        hint_en: "Think about which bacteria are left alive when the course is stopped early — the weakest, or the ones with some resistance?",
+        hint_zh: "想一想提早停藥時存活下來的是哪些細菌——最弱的，還是帶有一定抗藥性的？",
+        explanation_en: "An incomplete course kills the most susceptible bacteria first, leaving behind bacteria that happen to have some resistance. These survivors can multiply and pass resistance alleles to offspring, increasing the proportion of resistant bacteria in the population — a form of natural selection driven by antibiotic use.",
+        explanation_zh: "未完成的療程會先殺死最容易受抗生素影響的細菌，留下帶有一定抗藥性的細菌存活。這些存活的細菌能夠繁殖，並把抗藥基因傳給後代，令族群中具抗藥性的細菌比例上升——這是由使用抗生素所驅動的一種天擇。"
+      },
+      {
+        id: "hd-h1",
+        topic: "Health and Diseases",
+        subtopic: "Immune response",
+        difficulty: "hard",
+        source: "hkdse-style",
+        stem_en: "The graph shows antibody concentration in the blood after a first exposure to a pathogen, and after a second exposure to the same pathogen. Which statement best explains why the response to the second exposure is faster and larger?",
+        stem_zh: "下圖顯示首次及第二次接觸同一病原體後血液中抗體濃度的變化。以下哪項陳述最能解釋為何第二次的反應較快及較強？",
+        figure: {
+          caption_en: "Antibody concentration against time (1st and 2nd exposure)",
+          caption_zh: "抗體濃度對時間的關係圖（第一次及第二次接觸）",
+          svg: `<svg viewBox="0 0 320 190" xmlns="http://www.w3.org/2000/svg">
+            <line x1="45" y1="20" x2="45" y2="160" stroke="#334155" stroke-width="2"/>
+            <line x1="45" y1="160" x2="300" y2="160" stroke="#334155" stroke-width="2"/>
+            <polyline points="45,158 70,150 95,120 120,115 145,140 165,155" fill="none" stroke="#0f766e" stroke-width="3"/>
+            <polyline points="165,155 185,100 210,45 235,32 260,35 290,50" fill="none" stroke="#b91c1c" stroke-width="3"/>
+            <line x1="165" y1="20" x2="165" y2="160" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 3"/>
+            <text x="10" y="35" font-size="11" fill="#334155">Antibody</text>
+            <text x="150" y="182" font-size="11" fill="#334155" text-anchor="middle">Time</text>
+            <text x="120" y="35" font-size="10" fill="#0f766e">1st exposure</text>
+            <text x="220" y="27" font-size="10" fill="#b91c1c">2nd exposure</text>
+          </svg>`
+        },
+        options: [
+          { key: "A", en: "The pathogen becomes weaker after the first exposure.", zh: "病原體在首次接觸後會變得較弱。" },
+          { key: "B", en: "Memory B cells produced during the first exposure recognise the pathogen quickly and divide rapidly to produce antibodies.", zh: "首次接觸時產生的記憶B細胞能迅速識別病原體，並快速分裂以產生抗體。" },
+          { key: "C", en: "The second exposure always involves a different, unrelated pathogen.", zh: "第二次接觸的必定是另一種無關的病原體。" },
+          { key: "D", en: "Antibody production during a second exposure does not involve B cells.", zh: "第二次接觸時抗體的產生不涉及B細胞。" }
+        ],
+        answer: "B",
+        hint_en: "This is the basis of immunological memory — think about what kind of cell 'remembers' a pathogen after a first infection.",
+        hint_zh: "這是免疫記憶的基礎——想一想哪種細胞會在首次感染後「記住」病原體。",
+        explanation_en: "During the primary response, some activated B cells become long-lived memory B cells. On a second exposure to the same pathogen, these memory cells recognise it immediately and rapidly differentiate into plasma cells that produce large amounts of antibody sooner and in greater quantity than in the primary response — this is why vaccination is effective.",
+        explanation_zh: "在首次（原發性）免疫反應中，部分被活化的B細胞會變成長壽的記憶B細胞。當再次接觸同一病原體時，這些記憶細胞能立即識別病原體，並迅速分化為漿細胞，比首次反應更快及更大量地產生抗體——這正是疫苗接種有效的原理。"
+      },
+      {
+        id: "hp-e1",
+        topic: "Human Physiology",
+        subtopic: "Gas exchange",
+        difficulty: "easy",
+        source: "original",
+        stem_en: "Which feature of alveoli helps to increase the efficiency of gas exchange?",
+        stem_zh: "肺泡的哪項特徵有助提升氣體交換的效率？",
+        options: [
+          { key: "A", en: "Thick alveolar walls", zh: "厚的肺泡壁" },
+          { key: "B", en: "Large surface area and rich blood capillary network", zh: "龐大的表面積及豐富的微血管網絡" },
+          { key: "C", en: "Low moisture on the inner surface", zh: "內表面濕度低" },
+          { key: "D", en: "Very few alveoli per lung", zh: "每邊肺部的肺泡數目極少" }
+        ],
+        answer: "B",
+        hint_en: "Think about the general features that increase efficiency of exchange surfaces: surface area, thinness, blood supply, moisture.",
+        hint_zh: "想一想能提升交換表面效率的一般特徵：表面積、薄度、血液供應及濕潤度。",
+        explanation_en: "Alveoli have a huge total surface area, thin walls (one cell thick), a rich capillary network, and a moist inner surface — all of which maximise the rate of diffusion of oxygen and carbon dioxide between air and blood.",
+        explanation_zh: "肺泡具有龐大的總表面積、薄壁（只有一個細胞的厚度）、豐富的微血管網絡及濕潤的內表面——這些特徵均有助提升氧氣及二氧化碳在空氣和血液之間擴散的速率。"
+      },
+      {
+        id: "hp-m1",
+        topic: "Human Physiology",
+        subtopic: "Circulatory system",
+        difficulty: "medium",
+        source: "original",
+        stem_en: "Why does the left ventricle of the human heart have a thicker muscular wall than the right ventricle?",
+        stem_zh: "人類心臟的左心室為何比右心室有較厚的肌肉壁？",
+        options: [
+          { key: "A", en: "It only pumps blood to the lungs, which is a short distance.", zh: "它只需把血液泵送到肺部，距離較短。" },
+          { key: "B", en: "It pumps blood at high pressure around the whole body (systemic circulation).", zh: "它需要以較高壓力把血液泵送至全身（體循環）。" },
+          { key: "C", en: "It contains valves while the right ventricle does not.", zh: "它含有瓣膜，而右心室則沒有。" },
+          { key: "D", en: "It has a smaller volume of blood to pump than the right ventricle.", zh: "它需要泵送的血液量比右心室少。" }
+        ],
+        answer: "B",
+        hint_en: "Compare the distance/resistance of the systemic circuit (whole body) with the pulmonary circuit (lungs only).",
+        hint_zh: "比較體循環（全身）與肺循環（只到肺部）所需克服的距離／阻力。",
+        explanation_en: "The left ventricle pumps oxygenated blood through the aorta to the entire body (systemic circulation), which requires much higher pressure to overcome greater distance and resistance. The right ventricle only pumps blood to the nearby lungs (pulmonary circulation), so it needs less pressure and therefore a thinner wall.",
+        explanation_zh: "左心室需把含氧血液經主動脈泵送至全身（體循環），需要較高的壓力以克服較長的距離及較大的阻力。右心室則只需把血液泵送至鄰近的肺部（肺循環），所需壓力較小，因此心室壁較薄。"
+      },
+      {
+        id: "hp-h1",
+        topic: "Human Physiology",
+        subtopic: "Homeostasis",
+        difficulty: "hard",
+        source: "hkdse-style",
+        stem_en: "After a meal, blood glucose concentration rises. Which sequence correctly describes how the body restores normal blood glucose levels through negative feedback?",
+        stem_zh: "進食後，血糖濃度上升。以下哪個次序正確描述身體如何透過負回饋機制使血糖回復正常水平？",
+        options: [
+          { key: "A", en: "Pancreas detects rise → secretes insulin → liver/muscle cells absorb glucose and convert it to glycogen → blood glucose falls", zh: "胰臟偵測到上升 → 分泌胰島素 → 肝臟／肌肉細胞吸收葡萄糖並轉化為肝醣 → 血糖下降" },
+          { key: "B", en: "Liver detects rise → secretes glucagon → blood glucose rises further", zh: "肝臟偵測到上升 → 分泌胰高血糖素 → 血糖進一步上升" },
+          { key: "C", en: "Pancreas detects rise → secretes glucagon → glycogen is converted to glucose → blood glucose rises further", zh: "胰臟偵測到上升 → 分泌胰高血糖素 → 肝醣轉化為葡萄糖 → 血糖進一步上升" },
+          { key: "D", en: "Kidneys detect rise → excrete all excess glucose in urine only → blood glucose returns to normal", zh: "腎臟偵測到上升 → 只透過尿液排出所有過剩的葡萄糖 → 血糖回復正常" }
+        ],
+        answer: "A",
+        hint_en: "Negative feedback should oppose the original change (a rise in glucose should trigger a response that lowers it, via insulin, not glucagon).",
+        hint_zh: "負回饋應對抗原來的變化（血糖上升應觸發使血糖下降的反應，即胰島素而非胰高血糖素）。",
+        explanation_en: "When blood glucose rises, the pancreas (islets of Langerhans) detects this and secretes insulin. Insulin stimulates liver and muscle cells to take up glucose and convert it into glycogen for storage, lowering blood glucose back towards the normal set point. Glucagon has the opposite effect and is released when blood glucose is too low, not too high.",
+        explanation_zh: "當血糖上升時，胰臟（胰島）會偵測到此變化並分泌胰島素。胰島素刺激肝臟及肌肉細胞吸收葡萄糖，並將其轉化為肝醣儲存，使血糖回復至正常水平。胰高血糖素的作用則相反，是在血糖過低（而非過高）時釋放。"
+      }
+    ];
+
+    let authMode = "register";
+
+    const registerModeBtn = document.getElementById("registerModeBtn");
+    const loginModeBtn = document.getElementById("loginModeBtn");
+    const authForm = document.getElementById("authForm");
+    const authSubmitBtn = document.getElementById("authSubmitBtn");
+    const clearBtn = document.getElementById("clearBtn");
+    const registerFields = document.getElementById("registerFields");
+    const forgotPasswordBtn = document.getElementById("forgotPasswordBtn");
+    const resendVerificationBtn = document.getElementById("resendVerificationBtn");
+    const refreshVerificationBtn = document.getElementById("refreshVerificationBtn");
+
+    const authStatus = document.getElementById("authStatus");
+    const verificationNotice = document.getElementById("verificationNotice");
+    const verifiedNotice = document.getElementById("verifiedNotice");
+    const userBox = document.getElementById("userBox");
+    const userMeta = document.getElementById("userMeta");
+
+    const topRightUser = document.getElementById("topRightUser");
+    const topEditProfileBtn = document.getElementById("topEditProfileBtn");
+    const topLogoutBtn = document.getElementById("topLogoutBtn");
+
+    const profileCard = document.getElementById("profileCard");
+    const profileForm = document.getElementById("profileForm");
+    const profileStatus = document.getElementById("profileStatus");
+    const closeProfileBtn = document.getElementById("closeProfileBtn");
+
+    const studentNameInput = document.getElementById("studentName");
+    const userRoleInput = document.getElementById("userRole");
+    const schoolClassInput = document.getElementById("schoolClass");
+    const languagePrefInput = document.getElementById("languagePref");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+
+    const profileNameInput = document.getElementById("profileName");
+    const profileRoleInput = document.getElementById("profileRole");
+    const profileClassInput = document.getElementById("profileClass");
+    const profileLanguageInput = document.getElementById("profileLanguage");
+
+    const quizForm = document.getElementById("quizForm");
+    const quizStatus = document.getElementById("quizStatus");
+    const previewBtn = document.getElementById("previewBtn");
+    const quizModeInput = document.getElementById("quizMode");
+    const topicInput = document.getElementById("topic");
+    const difficultyInput = document.getElementById("difficulty");
+    const questionCountInput = document.getElementById("questionCount");
+    const quizLanguageInput = document.getElementById("quizLanguage");
+    const timerModeInput = document.getElementById("timerMode");
+    const notesInput = document.getElementById("notes");
+
+    const googleSignInBtn = document.getElementById("googleSignInBtn");
+    const langEnBtn = document.getElementById("langEnBtn");
+    const langZhBtn = document.getElementById("langZhBtn");
+
+    const practiceCard = document.getElementById("practiceCard");
+    const practiceProgress = document.getElementById("practiceProgress");
+    const questionMount = document.getElementById("questionMount");
+    const quizSummary = document.getElementById("quizSummary");
+
+    const teacherDashboardCard = document.getElementById("teacherDashboardCard");
+    const loadResultsBtn = document.getElementById("loadResultsBtn");
+    const resultsMount = document.getElementById("resultsMount");
+
+    let currentLang = "en";
+    let activeQuestions = [];
+    let activeIndex = 0;
+    let score = 0;
+
+    function shuffle(arr) {
+      const a = arr.slice();
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function applyStaticLanguage() {
+      document.querySelectorAll("[data-en][data-zh]").forEach((el) => {
+        el.textContent = currentLang === "zh" ? el.getAttribute("data-zh") : el.getAttribute("data-en");
+      });
+    }
+
+    function setLanguage(lang) {
+      currentLang = lang === "zh" ? "zh" : "en";
+      langEnBtn.classList.toggle("active", currentLang === "en");
+      langZhBtn.classList.toggle("active", currentLang === "zh");
+      applyStaticLanguage();
+      if (activeQuestions.length) {
+        renderQuestion(activeIndex);
+      }
+    }
+
+    langEnBtn.addEventListener("click", () => setLanguage("en"));
+    langZhBtn.addEventListener("click", () => setLanguage("zh"));
+
+    googleSignInBtn.addEventListener("click", async () => {
+      try {
+        const result = await signInWithPopup(auth, googleProvider);
+        const user = result.user;
+        const existing = await getDoc(doc(db, "users", user.uid));
+
+        if (!existing.exists()) {
+          await setDoc(doc(db, "users", user.uid), {
+            uid: user.uid,
+            displayName: user.displayName || "",
+            email: user.email || "",
+            role: "student",
+            schoolClass: "",
+            languagePref: currentLang === "zh" ? "zh-Hant" : "en",
+            emailVerified: true,
+            provider: "google",
+            createdAt: serverTimestamp(),
+            updatedAt: serverTimestamp()
+          });
+        }
+
+        authStatus.textContent = "Signed in with Google.";
+      } catch (error) {
+        authStatus.textContent = "Google sign-in error: " + error.message;
+      }
+    });
+
+    async function saveAttempt(user, profile, questionObj, chosenKey, correct) {
+      if (!user) return;
+      try {
+        await addDoc(collection(db, "attempts"), {
+          uid: user.uid,
+          displayName: profile?.displayName || user.displayName || "Unknown",
+          schoolClass: profile?.schoolClass || "",
+          topic: questionObj.topic,
+          subtopic: questionObj.subtopic,
+          difficulty: questionObj.difficulty,
+          questionId: questionObj.id,
+          chosenKey,
+          correctKey: questionObj.answer,
+          correct,
+          createdAt: serverTimestamp()
+        });
+      } catch (error) {
+        console.error("Could not save attempt:", error.message);
+      }
+    }
+
+    function filterQuestions(topic, difficulty, count) {
+      let pool = QUESTION_BANK.slice();
+      if (topic && topic !== "All Topics") {
+        pool = pool.filter((q) => q.topic === topic);
+      }
+      if (difficulty && difficulty !== "mixed") {
+        pool = pool.filter((q) => q.difficulty === difficulty);
+      }
+      pool = shuffle(pool);
+      return pool.slice(0, count);
+    }
+
+    function renderQuestion(idx) {
+      const q = activeQuestions[idx];
+      practiceProgress.textContent =
+        (currentLang === "zh" ? "第 " : "Question ") +
+        (idx + 1) +
+        (currentLang === "zh" ? " 題，共 " : " of ") +
+        activeQuestions.length +
+        (currentLang === "zh" ? " 題" : "");
+
+      const stem = currentLang === "zh" ? q.stem_zh : q.stem_en;
+      const diffLabelMap = currentLang === "zh"
+        ? { easy: "容易", medium: "中等", hard: "困難" }
+        : { easy: "Easy", medium: "Medium", hard: "Hard" };
+
+      let figureHtml = "";
+      if (q.figure) {
+        const caption = currentLang === "zh" ? q.figure.caption_zh : q.figure.caption_en;
+        figureHtml =
+          '<figure class="question-figure">' + q.figure.svg +
+          "<figcaption>" + caption + "</figcaption></figure>";
+      }
+
+      let optionsHtml = "";
+      q.options.forEach((opt) => {
+        const label = currentLang === "zh" ? opt.zh : opt.en;
+        optionsHtml +=
+          '<div class="option-row" data-key="' + opt.key + '">' +
+          '<span class="option-key">' + opt.key + ".</span><span>" + label + "</span></div>";
+      });
+
+      questionMount.innerHTML =
+        '<div class="question-block">' +
+        '<div class="question-meta">' +
+        '<span class="tag">' + q.topic + "</span>" +
+        '<span class="tag diff-' + q.difficulty + '">' + diffLabelMap[q.difficulty] + "</span>" +
+        '<span class="tag">' + q.subtopic + "</span>" +
+        "</div>" +
+        '<div class="question-stem">' + (idx + 1) + ". " + stem + "</div>" +
+        figureHtml +
+        '<div id="optionsMount">' + optionsHtml + "</div>" +
+        '<div class="hint-box hidden" id="hintBox"></div>' +
+        '<div class="feedback-line hidden" id="feedbackLine"></div>' +
+        '<div class="question-actions">' +
+        '<button class="btn btn-primary" id="checkBtn" type="button">' + (currentLang === "zh" ? "核對答案" : "Check answer") + "</button>" +
+        '<button class="reveal-toggle" id="revealBtn" type="button">' + (currentLang === "zh" ? "顯示答案及解釋" : "Show answer & explanation") + "</button>" +
+        '<button class="btn btn-secondary hidden" id="nextBtn" type="button">' +
+        (idx === activeQuestions.length - 1 ? (currentLang === "zh" ? "完成" : "Finish") : (currentLang === "zh" ? "下一題" : "Next question")) +
+        "</button>" +
+        "</div>" +
+        '<div class="explanation-box hidden" id="explanationBox"></div>' +
+        "</div>";
+
+      let selectedKey = null;
+      let answered = false;
+
+      questionMount.querySelectorAll(".option-row").forEach((row) => {
+        row.addEventListener("click", () => {
+          if (answered) return;
+          questionMount.querySelectorAll(".option-row").forEach((r) => r.classList.remove("selected"));
+          row.classList.add("selected");
+          selectedKey = row.getAttribute("data-key");
+        });
+      });
+
+      const hintBox = questionMount.querySelector("#hintBox");
+      const feedbackLine = questionMount.querySelector("#feedbackLine");
+      const checkBtn = questionMount.querySelector("#checkBtn");
+      const revealBtn = questionMount.querySelector("#revealBtn");
+      const nextBtn = questionMount.querySelector("#nextBtn");
+      const explanationBox = questionMount.querySelector("#explanationBox");
+
+      revealBtn.addEventListener("click", () => {
+        const isHidden = explanationBox.classList.contains("hidden");
+        if (isHidden) {
+          const correctLabel = currentLang === "zh" ? "正確答案：" : "Correct answer: ";
+          const explanation = currentLang === "zh" ? q.explanation_zh : q.explanation_en;
+          explanationBox.innerHTML = "<strong>" + correctLabel + q.answer + "</strong><br/>" + explanation;
+          explanationBox.classList.remove("hidden");
+          revealBtn.textContent = currentLang === "zh" ? "隱藏答案及解釋" : "Hide answer & explanation";
+        } else {
+          explanationBox.classList.add("hidden");
+          revealBtn.textContent = currentLang === "zh" ? "顯示答案及解釋" : "Show answer & explanation";
+        }
+      });
+
+      checkBtn.addEventListener("click", async () => {
+        if (answered) return;
+        if (!selectedKey) {
+          feedbackLine.classList.remove("hidden", "correct");
+          feedbackLine.classList.add("wrong");
+          feedbackLine.textContent = currentLang === "zh" ? "請先選擇一個答案。" : "Please select an option first.";
+          return;
+        }
+
+        answered = true;
+        const correct = selectedKey === q.answer;
+
+        questionMount.querySelectorAll(".option-row").forEach((row) => {
+          const key = row.getAttribute("data-key");
+          if (key === q.answer) row.classList.add("correct-flag");
+          if (key === selectedKey && !correct) row.classList.add("wrong-flag");
+        });
+
+        feedbackLine.classList.remove("hidden");
+        if (correct) {
+          score += 1;
+          feedbackLine.classList.remove("wrong");
+          feedbackLine.classList.add("correct");
+          feedbackLine.textContent = currentLang === "zh" ? "✅ 答對了！" : "✅ Correct!";
+        } else {
+          feedbackLine.classList.remove("correct");
+          feedbackLine.classList.add("wrong");
+          feedbackLine.textContent = currentLang === "zh" ? "❌ 不正確。" : "❌ Not quite.";
+          hintBox.classList.remove("hidden");
+          hintBox.textContent = "💡 " + (currentLang === "zh" ? q.hint_zh : q.hint_en);
+        }
+
+        nextBtn.classList.remove("hidden");
+
+        const user = auth.currentUser;
+        const profile = user ? await loadUserProfile(user.uid) : null;
+        await saveAttempt(user, profile, q, selectedKey, correct);
+      });
+
+      nextBtn.addEventListener("click", () => {
+        if (idx === activeQuestions.length - 1) {
+          finishQuiz();
+        } else {
+          activeIndex = idx + 1;
+          renderQuestion(activeIndex);
+        }
+      });
+    }
+
+    function finishQuiz() {
+      questionMount.innerHTML = "";
+      practiceProgress.textContent = "";
+      quizSummary.classList.remove("hidden");
+      const total = activeQuestions.length;
+      quizSummary.textContent =
+        (currentLang === "zh" ? "練習完成！你的成績：" : "Practice complete! Your score: ") +
+        score + " / " + total +
+        (currentLang === "zh" ? "\n重新設定題目以開始新的練習。" : "\nChange the quiz setup above and save again to start a new practice session.");
+    }
+
+    async function loadResults() {
+      resultsMount.innerHTML = (currentLang === "zh" ? "載入中..." : "Loading...");
+      try {
+        const snap = await getDocs(query(collection(db, "attempts")));
+        const byTopic = {};
+        const byStudent = {};
+
+        snap.forEach((docSnap) => {
+          const d = docSnap.data();
+          const topicKey = d.topic || "Unknown";
+          const studentKey = d.displayName || d.uid || "Unknown";
+
+          if (!byTopic[topicKey]) byTopic[topicKey] = { correct: 0, total: 0 };
+          byTopic[topicKey].total += 1;
+          if (d.correct) byTopic[topicKey].correct += 1;
+
+          if (!byStudent[studentKey]) byStudent[studentKey] = { correct: 0, total: 0, schoolClass: d.schoolClass || "" };
+          byStudent[studentKey].total += 1;
+          if (d.correct) byStudent[studentKey].correct += 1;
+        });
+
+        function pct(c, t) {
+          return t === 0 ? "0%" : Math.round((c / t) * 100) + "%";
+        }
+
+        let html = '<h3 class="section-title" style="font-size:16px;">' + (currentLang === "zh" ? "按主題劃分" : "By topic") + "</h3>";
+        html += '<table class="results-table"><thead><tr><th>' +
+          (currentLang === "zh" ? "主題" : "Topic") + "</th><th>" +
+          (currentLang === "zh" ? "答對" : "Correct") + "</th><th>" +
+          (currentLang === "zh" ? "總數" : "Total") + "</th><th>" +
+          (currentLang === "zh" ? "正確率" : "% correct") + "</th></tr></thead><tbody>";
+        Object.keys(byTopic).forEach((t) => {
+          const row = byTopic[t];
+          html += "<tr><td>" + t + "</td><td>" + row.correct + "</td><td>" + row.total + "</td><td>" + pct(row.correct, row.total) + "</td></tr>";
+        });
+        html += "</tbody></table>";
+
+        html += '<h3 class="section-title" style="font-size:16px; margin-top:18px;">' + (currentLang === "zh" ? "按學生劃分" : "By student") + "</h3>";
+        html += '<table class="results-table"><thead><tr><th>' +
+          (currentLang === "zh" ? "學生" : "Student") + "</th><th>" +
+          (currentLang === "zh" ? "班別" : "Class") + "</th><th>" +
+          (currentLang === "zh" ? "答對" : "Correct") + "</th><th>" +
+          (currentLang === "zh" ? "總數" : "Total") + "</th><th>" +
+          (currentLang === "zh" ? "正確率" : "% correct") + "</th></tr></thead><tbody>";
+        Object.keys(byStudent).forEach((s) => {
+          const row = byStudent[s];
+          html += "<tr><td>" + s + "</td><td>" + row.schoolClass + "</td><td>" + row.correct + "</td><td>" + row.total + "</td><td>" + pct(row.correct, row.total) + "</td></tr>";
+        });
+        html += "</tbody></table>";
+
+        if (Object.keys(byTopic).length === 0) {
+          html = currentLang === "zh" ? "暫時沒有作答記錄。" : "No attempt records yet.";
+        }
+
+        resultsMount.innerHTML = html;
+      } catch (error) {
+        resultsMount.textContent = (currentLang === "zh" ? "載入記錄時發生錯誤：" : "Error loading results: ") + error.message;
+      }
+    }
+
+    loadResultsBtn.addEventListener("click", loadResults);
+
+    function setAuthMode(mode) {
+      authMode = mode;
+
+      if (mode === "register") {
+        registerModeBtn.classList.add("active");
+        loginModeBtn.classList.remove("active");
+        registerFields.classList.remove("hidden");
+        authSubmitBtn.textContent = "Create account";
+        authStatus.textContent = "Register a new account with your real student name.";
+      } else {
+        loginModeBtn.classList.add("active");
+        registerModeBtn.classList.remove("active");
+        registerFields.classList.add("hidden");
+        authSubmitBtn.textContent = "Login";
+        authStatus.textContent = "Login with your registered email and password.";
+      }
+    }
+
+    function updateVerificationUI(user) {
+      verificationNotice.classList.add("hidden");
+      verifiedNotice.classList.add("hidden");
+      resendVerificationBtn.classList.add("hidden");
+      refreshVerificationBtn.classList.add("hidden");
+
+      if (!user) return;
+
+      if (user.emailVerified) {
+        verifiedNotice.classList.remove("hidden");
+      } else {
+        verificationNotice.classList.remove("hidden");
+        resendVerificationBtn.classList.remove("hidden");
+        refreshVerificationBtn.classList.remove("hidden");
+      }
+    }
+
+    async function loadUserProfile(uid) {
+      const userRef = doc(db, "users", uid);
+      const snap = await getDoc(userRef);
+      if (snap.exists()) {
+        return snap.data();
+      }
+      return null;
+    }
+
+    function fillProfileForm(profile, user) {
+      profileNameInput.value = profile?.displayName || user?.displayName || "";
+      profileRoleInput.value = profile?.role || "student";
+      profileClassInput.value = profile?.schoolClass || "";
+      profileLanguageInput.value = profile?.languagePref || "en";
+    }
+
+    function updateTopRight(user, profile) {
+      if (!user) {
+        topRightUser.textContent = "Not logged in";
+        topEditProfileBtn.classList.add("hidden");
+        topLogoutBtn.classList.add("hidden");
+        return;
+      }
+
+      const displayName = profile?.displayName || user.displayName || "User";
+      const role = profile?.role || "member";
+      topRightUser.textContent = `${displayName} (${role})`;
+      topEditProfileBtn.classList.remove("hidden");
+      topLogoutBtn.classList.remove("hidden");
+    }
+
+    function updateUserBox(user, profile) {
+      if (!user) {
+        userBox.classList.add("hidden");
+        userMeta.textContent = "";
+        return;
+      }
+
+      userBox.classList.remove("hidden");
+      const displayName = profile?.displayName || user.displayName || "N/A";
+      const role = profile?.role || "N/A";
+      const schoolClass = profile?.schoolClass || "N/A";
+      const languagePref = profile?.languagePref || "N/A";
+
+      userMeta.textContent =
+        "Name: " + displayName + "\n" +
+        "Email: " + (user.email || "N/A") + "\n" +
+        "Role: " + role + "\n" +
+        "Class: " + schoolClass + "\n" +
+        "Language: " + languagePref + "\n" +
+        "Email verified: " + (user.emailVerified ? "Yes" : "No");
+    }
+
+    async function syncUserInterface(user) {
+      if (!user) {
+        updateTopRight(null, null);
+        updateUserBox(null, null);
+        updateVerificationUI(null);
+        profileCard.classList.add("hidden");
+        teacherDashboardCard.classList.add("hidden");
+        return;
+      }
+
+      const profile = await loadUserProfile(user.uid);
+      fillProfileForm(profile, user);
+      updateTopRight(user, profile);
+      updateUserBox(user, profile);
+      updateVerificationUI(user);
+
+      if (profile?.role === "teacher") {
+        teacherDashboardCard.classList.remove("hidden");
+      } else {
+        teacherDashboardCard.classList.add("hidden");
+      }
+    }
+
+    registerModeBtn.addEventListener("click", () => setAuthMode("register"));
+    loginModeBtn.addEventListener("click", () => setAuthMode("login"));
+
+    clearBtn.addEventListener("click", () => {
+      authForm.reset();
+      authStatus.textContent = "Form cleared.";
+    });
+
+    authForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const email = emailInput.value.trim();
+      const password = passwordInput.value.trim();
+
+      if (!email || !password) {
+        authStatus.textContent = "Please enter both email and password.";
+        return;
+      }
+
+      try {
+        if (authMode === "register") {
+          const studentName = studentNameInput.value.trim();
+          const role = userRoleInput.value;
+          const schoolClass = schoolClassInput.value.trim();
+          const languagePref = languagePrefInput.value;
+
+          if (!studentName) {
+            authStatus.textContent = "Please enter the student name / full name.";
+            return;
+          }
+
+          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+          const user = userCredential.user;
+
+          await updateProfile(user, {
+            displayName: studentName
+          });
+
+          await setDoc(doc(db, "users", user.uid), {
+            uid: user.uid,
+            displayName: studentName,
+            email,
+            role,
+            schoolClass,
+            languagePref,
+            emailVerified: false,
+            createdAt: serverTimestamp(),
+            updatedAt: serverTimestamp()
+          });
+
+          await sendEmailVerification(user);
+
+          authStatus.textContent =
+            "Account created successfully. Verification email has been sent to your mailbox.";
+        } else {
+          await signInWithEmailAndPassword(auth, email, password);
+          authStatus.textContent = "Login successful.";
+        }
+      } catch (error) {
+        authStatus.textContent = "Authentication error: " + error.message;
+      }
+    });
+
+    forgotPasswordBtn.addEventListener("click", async () => {
+      const email = emailInput.value.trim();
+
+      if (!email) {
+        authStatus.textContent = "Please enter your email first, then click Forgot password.";
+        return;
+      }
+
+      try {
+        await sendPasswordResetEmail(auth, email);
+        authStatus.textContent = "Password reset email has been sent. Please check your inbox.";
+      } catch (error) {
+        authStatus.textContent = "Password reset error: " + error.message;
+      }
+    });
+
+    resendVerificationBtn.addEventListener("click", async () => {
+      const user = auth.currentUser;
+      if (!user) {
+        authStatus.textContent = "Please login first.";
+        return;
+      }
+
+      try {
+        await sendEmailVerification(user);
+        authStatus.textContent = "Verification email sent again. Please check your inbox.";
+      } catch (error) {
+        authStatus.textContent = "Verification email error: " + error.message;
+      }
+    });
+
+    refreshVerificationBtn.addEventListener("click", async () => {
+      const user = auth.currentUser;
+      if (!user) {
+        authStatus.textContent = "Please login first.";
+        return;
+      }
+
+      try {
+        await reload(user);
+        const refreshedUser = auth.currentUser;
+
+        if (refreshedUser?.emailVerified) {
+          await updateDoc(doc(db, "users", refreshedUser.uid), {
+            emailVerified: true,
+            updatedAt: serverTimestamp()
+          });
+          authStatus.textContent = "Verification status refreshed. Your email is verified.";
+        } else {
+          authStatus.textContent = "Email is still not verified yet. Please check your email and click the link.";
+        }
+
+        await syncUserInterface(refreshedUser);
+      } catch (error) {
+        authStatus.textContent = "Refresh verification error: " + error.message;
+      }
+    });
+
+    onAuthStateChanged(auth, async (user) => {
+      await syncUserInterface(user);
+    });
+
+    topLogoutBtn.addEventListener("click", async () => {
+      try {
+        await signOut(auth);
+        authStatus.textContent = "Logged out successfully.";
+      } catch (error) {
+        authStatus.textContent = "Logout error: " + error.message;
+      }
+    });
+
+    topEditProfileBtn.addEventListener("click", () => {
+      profileCard.classList.remove("hidden");
+      profileStatus.textContent = "You can edit your profile here.";
+      profileCard.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    closeProfileBtn.addEventListener("click", () => {
+      profileCard.classList.add("hidden");
+      profileStatus.textContent = "Profile editor closed.";
+    });
+
+    profileForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const user = auth.currentUser;
+      if (!user) {
+        profileStatus.textContent = "Please login first.";
+        return;
+      }
+
+      const newName = profileNameInput.value.trim();
+      const newRole = profileRoleInput.value;
+      const newClass = profileClassInput.value.trim();
+      const newLanguage = profileLanguageInput.value;
+
+      if (!newName) {
+        profileStatus.textContent = "Display name cannot be empty.";
+        return;
+      }
+
+      try {
+        await updateProfile(user, {
+          displayName: newName
+        });
+
+        await updateDoc(doc(db, "users", user.uid), {
+          displayName: newName,
+          role: newRole,
+          schoolClass: newClass,
+          languagePref: newLanguage,
+          emailVerified: user.emailVerified,
+          updatedAt: serverTimestamp()
+        });
+
+        profileStatus.textContent = "Profile updated successfully.";
+        await syncUserInterface(auth.currentUser);
+      } catch (error) {
+        profileStatus.textContent = "Profile update error: " + error.message;
+      }
+    });
+
+    previewBtn.addEventListener("click", () => {
+      const previewText =
+        "Preview\n" +
+        "Mode: " + quizModeInput.value + "\n" +
+        "Topic: " + topicInput.value + "\n" +
+        "Difficulty: " + difficultyInput.value + "\n" +
+        "Questions: " + questionCountInput.value + "\n" +
+        "Language: " + quizLanguageInput.value + "\n" +
+        "Timer: " + timerModeInput.value + "\n" +
+        "Note: " + (notesInput.value.trim() || "None");
+
+      quizStatus.textContent = previewText;
+    });
+
+    quizForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const currentUser = auth.currentUser;
+      if (!currentUser) {
+        quizStatus.textContent = "Please login first before saving quiz setup.";
+        return;
+      }
+
+      const quizData = {
+        uid: currentUser.uid,
+        userEmail: currentUser.email || "",
+        portalMode: quizModeInput.value,
+        topic: topicInput.value,
+        difficulty: difficultyInput.value,
+        questionCount: Number(questionCountInput.value),
+        quizLanguage: quizLanguageInput.value,
+        timerMode: timerModeInput.value,
+        notes: notesInput.value.trim(),
+        createdAt: serverTimestamp()
+      };
+
+      try {
+        await addDoc(collection(db, "quizSetups"), quizData);
+
+        quizStatus.textContent =
+          "Quiz setup saved successfully.\n" +
+          "Topic: " + quizData.topic + "\n" +
+          "Difficulty: " + quizData.difficulty + "\n" +
+          "Questions: " + quizData.questionCount;
+
+        const selectedTopic = quizData.topic;
+        const selectedDifficulty = quizData.difficulty;
+        const selectedCount = quizData.questionCount;
+
+        quizForm.reset();
+        difficultyInput.value = "medium";
+        questionCountInput.value = "20";
+
+        activeQuestions = filterQuestions(selectedTopic, selectedDifficulty, selectedCount);
+        activeIndex = 0;
+        score = 0;
+        quizSummary.classList.add("hidden");
+
+        if (activeQuestions.length === 0) {
+          practiceCard.classList.remove("hidden");
+          questionMount.innerHTML = "";
+          practiceProgress.textContent =
+            currentLang === "zh"
+              ? "此題庫暫時未有符合條件的題目，請嘗試「混合難度」或「全部主題」。"
+              : "No demo questions match this topic/difficulty yet. Try 'Mixed' difficulty or 'All Topics'.";
+        } else {
+          practiceCard.classList.remove("hidden");
+          renderQuestion(0);
+          practiceCard.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      } catch (error) {
+        quizStatus.textContent = "Error saving quiz setup: " + error.message;
+      }
+    });
+
+    authStatus.textContent = "Firebase connected. V2 account system is ready.";
+  </script>
+</body>
+</html>

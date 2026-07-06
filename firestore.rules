@@ -1,0 +1,55 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+
+    function isTeacher() {
+      return isSignedIn() &&
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'teacher';
+    }
+
+    // users/{uid} - one profile doc per account (student or teacher).
+    match /users/{uid} {
+      allow read: if isOwner(uid) || isTeacher();
+      allow create: if isOwner(uid);
+      // Users can update their own profile, but cannot silently grant
+      // themselves the teacher role once already created as a student.
+      allow update: if isOwner(uid) &&
+        (request.resource.data.role == resource.data.role || isTeacher());
+      allow delete: if false;
+    }
+
+    // quizSetups/{id} - saved practice configuration per student/teacher.
+    match /quizSetups/{id} {
+      allow create: if isSignedIn() && request.resource.data.uid == request.auth.uid;
+      allow read: if isSignedIn() && (resource.data.uid == request.auth.uid || isTeacher());
+      allow update, delete: if false;
+    }
+
+    // attempts/{id} - one doc per answered question, used for analytics.
+    // Students may only create their own records (no editing/deleting
+    // afterwards, so results can't be tampered with). Teachers may read
+    // every record for the dashboard.
+    match /attempts/{id} {
+      allow create: if isSignedIn() && request.resource.data.uid == request.auth.uid;
+      allow read: if isSignedIn() && (resource.data.uid == request.auth.uid || isTeacher());
+      allow update, delete: if false;
+    }
+
+    // questions/{id} - future teacher-uploaded question bank
+    // (Phase 2). Everyone signed in can read; only teachers can write.
+    match /questions/{id} {
+      allow read: if isSignedIn();
+      allow create, update, delete: if isTeacher();
+    }
+  }
+}
