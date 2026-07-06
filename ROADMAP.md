@@ -45,6 +45,22 @@ versus what's still ahead, and gives the concrete next steps for each.
   real chart, since Excel can't carry an actual graph — only a Firestore-
   backed vector figure (like the 4 seed questions) can.
 
+## Answer-key validation (2025 batch)
+
+The 2025 folder was later updated with the actual Paper 1 answer key
+(`2025 DSE Biology Marking.pdf`), which wasn't available when the first 15
+adapted questions were written — those answers were worked out from biology
+reasoning alone. Once the key arrived, all 15 were cross-checked against it:
+12 matched, and 3 had genuine reasoning errors that are now fixed —
+`ge-e2` (self-fertilising organisms mean "sexual reproduction always needs
+two parents" isn't strictly true), `oe-m2` (blocking ATP production reduces
+water uptake too, not just mineral uptake, because active ion accumulation
+is what maintains the osmotic gradient), and `hd-m2` (an instant antibody
+spike indicates injected ready-made antibodies, not a booster vaccination,
+since even a fast memory response takes a few days to build up). Worth
+repeating for every future batch: source an official answer key wherever
+possible, and treat reasoning-only answers as provisional until checked.
+
 ## Why only 15 questions, and a copyright note (point 18)
 
 Every seed question is either written from scratch ("Original") or an
