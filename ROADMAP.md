@@ -28,6 +28,17 @@ versus what's still ahead, and gives the concrete next steps for each.
 - `HKDSE_Biology_Question_Bank_Template.xlsx` — the bulk-authoring template
   matching the question schema, with dropdowns for topic/difficulty/answer/
   source and an Instructions sheet (point 1/18).
+- Teacher upload tool (point 9, Spark-plan friendly): the teacher dashboard
+  now has an "Upload question bank" control. It reads the filled-in Excel
+  template entirely in the browser (SheetJS), validates every row (required
+  fields, answer must be A–D, difficulty must be Easy/Medium/Hard), and
+  batch-writes valid rows into the `questions` Firestore collection —
+  no server, no Cloud Functions, no billing plan upgrade needed. Uploaded
+  questions are merged with the seed bank automatically the next time any
+  student starts a practice session. Rows with an `image_description` but
+  no hand-built diagram show as a labelled placeholder box rather than a
+  real chart, since Excel can't carry an actual graph — only a Firestore-
+  backed vector figure (like the 4 seed questions) can.
 
 ## Why only 15 questions, and a copyright note (point 18)
 
@@ -39,19 +50,23 @@ be manually retyped/adapted by a teacher (or licensed) rather than scraped
 or reproduced by an AI — the Excel template and future upload tool are
 built to make that easy once you have the source material.
 
-## Phase 2 — teacher upload + email intake (points 9, 13)
+## Phase 2 — email intake (point 13)
 
-Not built yet; needs your decisions/credentials, so here's the shape:
-- A "Teacher upload" page reads the Excel template client-side (SheetJS),
-  validates rows, and writes them into the `questions` Firestore collection
-  (rules already allow teacher-only writes there).
-- Email-in pipeline: a teacher emails the filled-in Excel file to a fixed
-  address → a Cloud Function (2nd gen) parses the attachment and imports it.
-  This needs an inbound-email service (e.g. SendGrid Inbound Parse, Mailgun
-  routes, or Gmail API push notifications with domain-wide delegation) plus
-  the Blaze (pay-as-you-go) Firebase plan for Cloud Functions/outbound
-  network access. I can build the Function once you pick a provider and
-  enable billing.
+The in-browser upload above already solves the core need (teacher gets new
+questions into the system) without needing the Blaze billing plan. You
+decided to stay on Spark, so the literal "email the file" workflow is
+parked as optional, not required:
+- If you want it later without upgrading to Blaze: a free Google Apps
+  Script (tied to any Gmail account, including hiufungchan366@gmail.com)
+  can run on a timer, read new mail via the built-in `GmailApp` service,
+  and push validated rows into Firestore using its REST API — no Cloud
+  Functions, no billing account. More moving parts to set up (a script
+  project, a Firestore service account) than the in-browser upload, so
+  only worth building if you specifically want the email step back.
+- If you outgrow Spark later (e.g. want real-time email import, server-side
+  image generation, or scheduled digests), Cloud Functions on Blaze is the
+  upgrade path — Blaze's free tier (2M function invocations/month) means
+  actual cost stays near $0 at this project's scale even after upgrading.
 
 ## Phase 3 — structural (long) questions (point from your first message)
 

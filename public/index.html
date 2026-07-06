@@ -601,6 +601,22 @@
       background: var(--bg-soft);
     }
 
+    .upload-section {
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px dashed var(--border);
+    }
+
+    .figure-placeholder {
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--muted);
+      background: #fbfdff;
+    }
+
     @media (max-width: 900px) {
       .hero,
       .grid,
@@ -863,6 +879,18 @@
           <button class="btn btn-primary" id="loadResultsBtn" type="button" data-en="Load results" data-zh="載入記錄">Load results</button>
         </div>
         <div id="resultsMount"></div>
+
+        <div class="upload-section">
+          <h3 class="section-title" style="font-size: 16px;" data-en="Upload question bank" data-zh="上載題庫">Upload question bank</h3>
+          <p class="section-desc" data-en="Upload a filled-in copy of the Excel template. Rows are checked, then added to the shared question bank used by every student's practice sessions." data-zh="上載已填寫的Excel範本。系統會先檢查每一行，然後加入所有學生練習時共用的題庫。">
+            Upload a filled-in copy of the Excel template. Rows are checked, then added to the shared question bank used by every student's practice sessions.
+          </p>
+          <div class="button-row">
+            <input type="file" id="questionUploadInput" accept=".xlsx" />
+            <button class="btn btn-primary" id="uploadQuestionsBtn" type="button" data-en="Upload" data-zh="上載">Upload</button>
+          </div>
+          <div class="status-box hidden" id="uploadStatus"></div>
+        </div>
       </div>
     </section>
 
@@ -938,6 +966,7 @@
     </p>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
     import {
@@ -964,7 +993,8 @@
       updateDoc,
       serverTimestamp,
       query,
-      getDocs
+      getDocs,
+      writeBatch
     } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
     const firebaseConfig = {
@@ -1504,17 +1534,146 @@
       }
     }
 
-    function filterQuestions(topic, difficulty, count) {
-      let pool = QUESTION_BANK.slice();
+    async function getQuestionPool() {
+      const pool = QUESTION_BANK.slice();
+      try {
+        const snap = await getDocs(collection(db, "questions"));
+        snap.forEach((docSnap) => {
+          pool.push({ id: docSnap.id, ...docSnap.data() });
+        });
+      } catch (error) {
+        console.error("Could not load uploaded questions:", error.message);
+      }
+      return pool;
+    }
+
+    function selectQuestions(pool, topic, difficulty, count) {
+      let filtered = pool.slice();
       if (topic && topic !== "All Topics") {
-        pool = pool.filter((q) => q.topic === topic);
+        filtered = filtered.filter((q) => q.topic === topic);
       }
       if (difficulty && difficulty !== "mixed") {
-        pool = pool.filter((q) => q.difficulty === difficulty);
+        filtered = filtered.filter((q) => q.difficulty === difficulty);
       }
-      pool = shuffle(pool);
-      return pool.slice(0, count);
+      filtered = shuffle(filtered);
+      return filtered.slice(0, count);
     }
+
+    const questionUploadInput = document.getElementById("questionUploadInput");
+    const uploadQuestionsBtn = document.getElementById("uploadQuestionsBtn");
+    const uploadStatus = document.getElementById("uploadStatus");
+
+    function rowToQuestion(row, index) {
+      const required = ["topic", "difficulty", "stem_en", "stem_zh", "option_a_en", "option_a_zh",
+        "option_b_en", "option_b_zh", "option_c_en", "option_c_zh", "option_d_en", "option_d_zh", "answer"];
+      const missing = required.filter((k) => !String(row[k] || "").trim());
+      if (missing.length) {
+        return { error: "Row " + (index + 2) + ": missing " + missing.join(", ") };
+      }
+
+      const answer = String(row.answer).trim().toUpperCase();
+      if (!["A", "B", "C", "D"].includes(answer)) {
+        return { error: "Row " + (index + 2) + ": answer must be A, B, C or D." };
+      }
+
+      const difficultyRaw = String(row.difficulty).trim().toLowerCase();
+      if (!["easy", "medium", "hard"].includes(difficultyRaw)) {
+        return { error: "Row " + (index + 2) + ": difficulty must be Easy, Medium or Hard." };
+      }
+
+      const question = {
+        topic: String(row.topic).trim(),
+        subtopic: String(row.subtopic || "").trim(),
+        difficulty: difficultyRaw,
+        stem_en: String(row.stem_en).trim(),
+        stem_zh: String(row.stem_zh).trim(),
+        options: [
+          { key: "A", en: String(row.option_a_en).trim(), zh: String(row.option_a_zh).trim() },
+          { key: "B", en: String(row.option_b_en).trim(), zh: String(row.option_b_zh).trim() },
+          { key: "C", en: String(row.option_c_en).trim(), zh: String(row.option_c_zh).trim() },
+          { key: "D", en: String(row.option_d_en).trim(), zh: String(row.option_d_zh).trim() }
+        ],
+        answer,
+        hint_en: String(row.hint_en || "").trim(),
+        hint_zh: String(row.hint_zh || "").trim(),
+        explanation_en: String(row.explanation_en || "").trim(),
+        explanation_zh: String(row.explanation_zh || "").trim(),
+        source: String(row.source || "Original").trim()
+      };
+
+      const imageDescription = String(row.image_description || "").trim();
+      if (imageDescription) {
+        question.figure = { caption_en: imageDescription, caption_zh: imageDescription, svg: null };
+      }
+
+      return { question };
+    }
+
+    uploadQuestionsBtn.addEventListener("click", async () => {
+      const user = auth.currentUser;
+      if (!user) {
+        uploadStatus.classList.remove("hidden");
+        uploadStatus.textContent = currentLang === "zh" ? "請先登入。" : "Please log in first.";
+        return;
+      }
+
+      const file = questionUploadInput.files[0];
+      if (!file) {
+        uploadStatus.classList.remove("hidden");
+        uploadStatus.textContent = currentLang === "zh" ? "請先選擇一個Excel檔案。" : "Please choose an Excel file first.";
+        return;
+      }
+
+      uploadStatus.classList.remove("hidden");
+      uploadStatus.textContent = currentLang === "zh" ? "正在讀取檔案..." : "Reading file...";
+
+      try {
+        const buffer = await file.arrayBuffer();
+        const workbook = XLSX.read(buffer, { type: "array" });
+        const sheetName = workbook.SheetNames.includes("Questions") ? "Questions" : workbook.SheetNames[0];
+        const sheet = workbook.Sheets[sheetName];
+        const rows = XLSX.utils.sheet_to_json(sheet, { defval: "" });
+
+        const errors = [];
+        const validQuestions = [];
+
+        rows.forEach((row, i) => {
+          const result = rowToQuestion(row, i);
+          if (result.error) errors.push(result.error);
+          else validQuestions.push(result.question);
+        });
+
+        if (validQuestions.length === 0) {
+          uploadStatus.textContent =
+            (currentLang === "zh" ? "沒有成功匯入任何題目。\n" : "No questions were imported.\n") +
+            errors.join("\n");
+          return;
+        }
+
+        const batch = writeBatch(db);
+        validQuestions.forEach((q) => {
+          const ref = doc(collection(db, "questions"));
+          batch.set(ref, {
+            ...q,
+            uploadedBy: user.uid,
+            uploadedByName: user.displayName || user.email || "Unknown",
+            createdAt: serverTimestamp()
+          });
+        });
+        await batch.commit();
+
+        let message = currentLang === "zh"
+          ? "成功匯入 " + validQuestions.length + " 條題目。"
+          : validQuestions.length + " question(s) imported successfully.";
+        if (errors.length) {
+          message += "\n" + (currentLang === "zh" ? "以下項目被略過：\n" : "Skipped:\n") + errors.join("\n");
+        }
+        uploadStatus.textContent = message;
+        questionUploadInput.value = "";
+      } catch (error) {
+        uploadStatus.textContent = (currentLang === "zh" ? "上載時發生錯誤：" : "Upload error: ") + error.message;
+      }
+    });
 
     function renderQuestion(idx) {
       const q = activeQuestions[idx];
@@ -1533,9 +1692,16 @@
       let figureHtml = "";
       if (q.figure) {
         const caption = currentLang === "zh" ? q.figure.caption_zh : q.figure.caption_en;
-        figureHtml =
-          '<figure class="question-figure">' + q.figure.svg +
-          "<figcaption>" + caption + "</figcaption></figure>";
+        if (q.figure.svg) {
+          figureHtml =
+            '<figure class="question-figure">' + q.figure.svg +
+            "<figcaption>" + caption + "</figcaption></figure>";
+        } else {
+          figureHtml =
+            '<figure class="question-figure"><div class="figure-placeholder">' +
+            (currentLang === "zh" ? "圖像／圖表：" : "Diagram: ") + caption +
+            "</div></figure>";
+        }
       }
 
       let optionsHtml = "";
@@ -1551,7 +1717,7 @@
         '<div class="question-meta">' +
         '<span class="tag">' + q.topic + "</span>" +
         '<span class="tag diff-' + q.difficulty + '">' + diffLabelMap[q.difficulty] + "</span>" +
-        '<span class="tag">' + q.subtopic + "</span>" +
+        (q.subtopic ? '<span class="tag">' + q.subtopic + "</span>" : "") +
         "</div>" +
         '<div class="question-stem">' + (idx + 1) + ". " + stem + "</div>" +
         figureHtml +
@@ -2072,7 +2238,9 @@
         difficultyInput.value = "medium";
         questionCountInput.value = "20";
 
-        activeQuestions = filterQuestions(selectedTopic, selectedDifficulty, selectedCount);
+        quizStatus.textContent += "\n" + (currentLang === "zh" ? "正在載入題目..." : "Loading questions...");
+        const questionPool = await getQuestionPool();
+        activeQuestions = selectQuestions(questionPool, selectedTopic, selectedDifficulty, selectedCount);
         activeIndex = 0;
         score = 0;
         quizSummary.classList.add("hidden");
