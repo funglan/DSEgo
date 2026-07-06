@@ -12,6 +12,9 @@
       --primary: #0f766e;
       --primary-dark: #0b5d57;
       --primary-soft: #dff5f1;
+      --accent: #f59e0b;
+      --accent-dark: #b45309;
+      --accent-soft: #fef3c7;
       --text: #1f2937;
       --muted: #6b7280;
       --border: #dbe3ea;
@@ -30,9 +33,13 @@
 
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: "Segoe UI", "Noto Sans HK", "PingFang HK", Arial, sans-serif;
       background: linear-gradient(180deg, var(--bg-soft) 0%, var(--bg) 100%);
       color: var(--text);
+    }
+
+    .full-width {
+      grid-column: 1 / -1 !important;
     }
 
     .container {
@@ -91,25 +98,96 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       border: 1px solid var(--border);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .panel:hover,
+    .quiz-card:hover,
+    .info-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 36px rgba(15, 23, 42, 0.12);
+    }
+
+    .btn {
+      transform: translateY(0);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--bg-soft);
+      overflow: hidden;
+      margin: 10px 0 16px;
+      border: 1px solid var(--border);
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 999px;
+      transition: width 0.3s ease;
+    }
+
+    .available-count {
+      font-size: 13px;
+      color: var(--primary-dark);
+      font-weight: 700;
+      margin-top: -4px;
+      margin-bottom: 4px;
     }
 
     .hero-card {
-      padding: 36px;
+      padding: 40px;
+      background: linear-gradient(135deg, #0f766e 0%, #0b5d57 55%, #164e63 100%);
+      border: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      right: -60px;
+      top: -60px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.35), transparent 70%);
     }
 
     .hero-card h1 {
-      margin: 0 0 16px;
-      font-size: 42px;
-      line-height: 1.1;
-      color: #12324a;
+      margin: 0 0 14px;
+      font-size: 40px;
+      line-height: 1.15;
+      color: #ffffff;
+      position: relative;
+    }
+
+    .hero-tagline {
+      display: inline-block;
+      background: rgba(245, 158, 11, 0.2);
+      color: #fde68a;
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 16px;
     }
 
     .hero-card p {
-      font-size: 18px;
+      font-size: 17px;
       line-height: 1.7;
-      color: var(--muted);
+      color: #d7ede9;
       margin: 0 0 18px;
       max-width: 60ch;
+      position: relative;
     }
 
     .hero-badges {
@@ -117,15 +195,40 @@
       flex-wrap: wrap;
       gap: 10px;
       margin-top: 18px;
+      position: relative;
     }
 
     .badge {
-      background: var(--primary-soft);
-      color: var(--primary-dark);
+      background: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.25);
       border-radius: 999px;
       padding: 9px 14px;
       font-size: 14px;
       font-weight: 700;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 24px;
+      background: var(--accent);
+      color: #1f2937;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 26px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(245, 158, 11, 0.35);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      position: relative;
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 14px 30px rgba(245, 158, 11, 0.45);
     }
 
     .side-panel {
@@ -245,12 +348,14 @@
     }
 
     .btn-primary {
-      background: var(--primary);
+      background: linear-gradient(135deg, var(--primary), #14958a);
       color: #fff;
+      box-shadow: 0 6px 16px rgba(15, 118, 110, 0.25);
     }
 
     .btn-primary:hover {
-      background: var(--primary-dark);
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      box-shadow: 0 8px 20px rgba(15, 118, 110, 0.35);
     }
 
     .btn-secondary {
@@ -656,40 +761,39 @@
 
     <section class="hero">
       <div class="hero-card">
-        <h1>HKDSE Biology Practice Platform</h1>
-        <p>
-          This portal helps students practise Biology multiple-choice questions by topic, difficulty, and question count, while teachers can later manage questions and review results.
-        </p>
-        <p>
-          Version 2 now includes required student-name registration, email verification, password reset support, top-right account display, and profile editing tools.
+        <span class="hero-tagline" data-en="DSE Biology, sorted" data-zh="生物科DSE，搞掂佢">DSE Biology, sorted</span>
+        <h1 data-en="Master DSE Biology, one quiz at a time" data-zh="逐份練習，掌握DSE生物科">Master DSE Biology, one quiz at a time</h1>
+        <p data-en="Pick a topic, pick a difficulty, and go — instant marking, hints when you slip up, and full explanations whenever you want them." data-zh="選定主題，選定難度，即刻開始——即時對答案，答錯有提示，隨時可以查看完整解釋。">
+          Pick a topic, pick a difficulty, and go — instant marking, hints when you slip up, and full explanations whenever you want them.
         </p>
         <div class="hero-badges">
-          <span class="badge">Email Verification</span>
-          <span class="badge">Forgot Password</span>
-          <span class="badge">Edit Profile</span>
-          <span class="badge">Firestore Ready</span>
+          <span class="badge" data-en="30+ Questions" data-zh="30+ 題目">30+ Questions</span>
+          <span class="badge" data-en="5 Syllabus Topics" data-zh="5 個課程主題">5 Syllabus Topics</span>
+          <span class="badge" data-en="Bilingual EN / 中" data-zh="雙語 EN / 中">Bilingual EN / 中</span>
+          <span class="badge" data-en="DSE-style MCQs" data-zh="DSE格式選擇題">DSE-style MCQs</span>
         </div>
+        <button class="hero-cta" id="heroStartBtn" type="button" data-en="Start practising ↓" data-zh="立即開始練習 ↓">Start practising ↓</button>
       </div>
 
       <div class="side-panel">
         <div class="panel">
-          <h2>Account system</h2>
-          <p>
-            Users can register with their name, email, password, role, class, and language preference, then manage their profile after login.
+          <h2 data-en="How it works" data-zh="使用方法">How it works</h2>
+          <p data-en="Sign in with Google, choose your topic and difficulty below, and jump straight into a set of practice questions." data-zh="使用Google帳戶登入，在下方選擇主題及難度，即可開始一組練習題目。">
+            Sign in with Google, choose your topic and difficulty below, and jump straight into a set of practice questions.
           </p>
         </div>
 
         <div class="panel">
-          <h2>Practice engine (demo)</h2>
-          <p>
-            A seed question bank is now connected: instant marking, an auto-shown hint on a wrong answer, and a hidden answer/explanation panel you open when you need it.
+          <h2 data-en="Built for real exam habits" data-zh="貼近應試習慣">Built for real exam habits</h2>
+          <p data-en="Answers are checked instantly, a hint appears the moment you slip up, and full explanations stay tucked away until you ask for them — just like revising with a teacher." data-zh="答案即時對正，答錯即時有提示，完整解釋則收起，直到你主動查看——就像有老師在旁指導溫習一樣。">
+            Answers are checked instantly, a hint appears the moment you slip up, and full explanations stay tucked away until you ask for them — just like revising with a teacher.
           </p>
         </div>
       </div>
     </section>
 
     <section class="grid">
-      <div class="auth-card">
+      <div class="auth-card" id="authCard">
         <h2 class="section-title">Account access</h2>
         <p class="section-desc">
           Register or login with Email/Password. Students should enter their real name so teachers can later identify records clearly.
@@ -778,85 +882,66 @@
         </div>
       </div>
 
-      <div class="quiz-card">
-        <h2 class="section-title">Quiz setup</h2>
-        <p class="section-desc">
-          Choose the topic, difficulty, and number of questions for the next Biology practice session.
+      <div class="quiz-card" id="quizCard">
+        <h2 class="section-title" data-en="Set up your practice" data-zh="設定練習">Set up your practice</h2>
+        <p class="section-desc" data-en="Pick a topic and difficulty, and start practising in seconds." data-zh="選擇主題及難度，數秒後即可開始練習。">
+          Pick a topic and difficulty, and start practising in seconds.
         </p>
 
         <form id="quizForm">
           <div class="two-col">
             <div>
-              <label for="quizMode">Portal mode</label>
-              <select id="quizMode">
-                <option value="student">Student mode</option>
-                <option value="teacher">Teacher mode</option>
-              </select>
-            </div>
-            <div>
-              <label for="topic">Topic</label>
+              <label for="topic" data-en="Topic" data-zh="主題">Topic</label>
               <select id="topic">
+                <option value="All Topics" selected>All Topics</option>
                 <option value="Cells and Molecules">Cells and Molecules</option>
                 <option value="Genetics and Evolution">Genetics and Evolution</option>
                 <option value="Organisms and Environment">Organisms and Environment</option>
                 <option value="Health and Diseases">Health and Diseases</option>
                 <option value="Human Physiology">Human Physiology</option>
-                <option value="All Topics">All Topics</option>
               </select>
             </div>
-          </div>
-
-          <div class="two-col">
             <div>
-              <label for="difficulty">Difficulty</label>
+              <label for="difficulty" data-en="Difficulty" data-zh="難度">Difficulty</label>
               <select id="difficulty">
+                <option value="mixed" selected>Mixed</option>
                 <option value="easy">Easy</option>
-                <option value="medium" selected>Medium</option>
+                <option value="medium">Medium</option>
                 <option value="hard">Hard</option>
-                <option value="mixed">Mixed</option>
-              </select>
-            </div>
-            <div>
-              <label for="questionCount">Number of questions</label>
-              <select id="questionCount">
-                <option value="10">10</option>
-                <option value="20" selected>20</option>
-                <option value="30">30</option>
-                <option value="40">40</option>
               </select>
             </div>
           </div>
+
+          <p class="available-count" id="availableCount"></p>
 
           <div class="two-col">
             <div>
-              <label for="quizLanguage">Question language</label>
-              <select id="quizLanguage">
-                <option value="en">English</option>
-                <option value="zh-Hant">繁體中文</option>
-                <option value="bilingual">Bilingual</option>
+              <label for="questionCount" data-en="Number of questions" data-zh="題目數量">Number of questions</label>
+              <select id="questionCount">
+                <option value="5">5</option>
+                <option value="10" selected>10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
               </select>
             </div>
             <div>
-              <label for="timerMode">Timer</label>
+              <label for="timerMode" data-en="Timer" data-zh="計時器">Timer</label>
               <select id="timerMode">
+                <option value="off" selected>Off</option>
                 <option value="on">On</option>
-                <option value="off">Off</option>
               </select>
             </div>
           </div>
 
-          <div>
-            <label for="notes">Teacher / student note</label>
-            <input id="notes" type="text" placeholder="Optional note for this quiz setup" />
-          </div>
+          <input type="hidden" id="quizLanguage" value="bilingual" />
+          <input type="hidden" id="notes" value="" />
 
           <div class="button-row">
-            <button class="btn btn-primary" type="submit">Save quiz setup</button>
-            <button class="btn btn-secondary" type="button" id="previewBtn">Preview selection</button>
+            <button class="btn btn-primary" type="submit" data-en="Start practising" data-zh="開始練習">Start practising</button>
           </div>
         </form>
 
-        <div class="status-box" id="quizStatus">No quiz setup saved yet.</div>
+        <div class="status-box hidden" id="quizStatus"></div>
       </div>
     </section>
 
@@ -864,6 +949,7 @@
       <div class="qbank-card panel hidden" id="practiceCard">
         <h2 class="section-title" data-en="Practice session" data-zh="練習題目">Practice session</h2>
         <p class="section-desc" id="practiceProgress"></p>
+        <div class="progress-track"><div class="progress-fill" id="progressFill" style="width: 0%;"></div></div>
         <div id="questionMount"></div>
         <div class="status-box hidden" id="quizSummary"></div>
       </div>
@@ -1802,8 +1888,10 @@
 
     const quizForm = document.getElementById("quizForm");
     const quizStatus = document.getElementById("quizStatus");
-    const previewBtn = document.getElementById("previewBtn");
-    const quizModeInput = document.getElementById("quizMode");
+    const availableCount = document.getElementById("availableCount");
+    const heroStartBtn = document.getElementById("heroStartBtn");
+    const authCard = document.getElementById("authCard");
+    const quizCard = document.getElementById("quizCard");
     const topicInput = document.getElementById("topic");
     const difficultyInput = document.getElementById("difficulty");
     const questionCountInput = document.getElementById("questionCount");
@@ -1817,6 +1905,7 @@
 
     const practiceCard = document.getElementById("practiceCard");
     const practiceProgress = document.getElementById("practiceProgress");
+    const progressFill = document.getElementById("progressFill");
     const questionMount = document.getElementById("questionMount");
     const quizSummary = document.getElementById("quizSummary");
 
@@ -1849,6 +1938,7 @@
       langEnBtn.classList.toggle("active", currentLang === "en");
       langZhBtn.classList.toggle("active", currentLang === "zh");
       applyStaticLanguage();
+      refreshAvailableCount();
       if (activeQuestions.length) {
         renderQuestion(activeIndex);
       }
@@ -2054,6 +2144,7 @@
         (currentLang === "zh" ? " 題，共 " : " of ") +
         activeQuestions.length +
         (currentLang === "zh" ? " 題" : "");
+      progressFill.style.width = Math.round(((idx + 1) / activeQuestions.length) * 100) + "%";
 
       const stem = currentLang === "zh" ? q.stem_zh : q.stem_en;
       const diffLabelMap = currentLang === "zh"
@@ -2355,6 +2446,8 @@
         updateVerificationUI(null);
         profileCard.classList.add("hidden");
         teacherDashboardCard.classList.add("hidden");
+        authCard.classList.remove("hidden");
+        quizCard.classList.remove("full-width");
         return;
       }
 
@@ -2363,6 +2456,12 @@
       updateTopRight(user, profile);
       updateUserBox(user, profile);
       updateVerificationUI(user);
+
+      // Once signed in, the identity is already shown in the top bar, so
+      // the big registration/login card just gets in the way — hide it
+      // and let the quiz setup take the full width instead.
+      authCard.classList.add("hidden");
+      quizCard.classList.add("full-width");
 
       if (profile?.role === "teacher") {
         teacherDashboardCard.classList.remove("hidden");
@@ -2556,18 +2655,21 @@
       }
     });
 
-    previewBtn.addEventListener("click", () => {
-      const previewText =
-        "Preview\n" +
-        "Mode: " + quizModeInput.value + "\n" +
-        "Topic: " + topicInput.value + "\n" +
-        "Difficulty: " + difficultyInput.value + "\n" +
-        "Questions: " + questionCountInput.value + "\n" +
-        "Language: " + quizLanguageInput.value + "\n" +
-        "Timer: " + timerModeInput.value + "\n" +
-        "Note: " + (notesInput.value.trim() || "None");
+    async function refreshAvailableCount() {
+      const pool = await getQuestionPool();
+      const matches = selectQuestions(pool, topicInput.value, difficultyInput.value, pool.length);
+      availableCount.textContent =
+        currentLang === "zh"
+          ? `此選擇目前有 ${matches.length} 條題目`
+          : `${matches.length} question${matches.length === 1 ? "" : "s"} available for this selection`;
+    }
 
-      quizStatus.textContent = previewText;
+    topicInput.addEventListener("change", refreshAvailableCount);
+    difficultyInput.addEventListener("change", refreshAvailableCount);
+    refreshAvailableCount();
+
+    heroStartBtn.addEventListener("click", () => {
+      quizCard.scrollIntoView({ behavior: "smooth", block: "start" });
     });
 
     quizForm.addEventListener("submit", async (e) => {
@@ -2575,14 +2677,14 @@
 
       const currentUser = auth.currentUser;
       if (!currentUser) {
-        quizStatus.textContent = "Please login first before saving quiz setup.";
+        quizStatus.classList.remove("hidden");
+        quizStatus.textContent = currentLang === "zh" ? "請先登入，然後才能開始練習。" : "Please log in first before starting practice.";
         return;
       }
 
       const quizData = {
         uid: currentUser.uid,
         userEmail: currentUser.email || "",
-        portalMode: quizModeInput.value,
         topic: topicInput.value,
         difficulty: difficultyInput.value,
         questionCount: Number(questionCountInput.value),
@@ -2592,26 +2694,14 @@
         createdAt: serverTimestamp()
       };
 
+      quizStatus.classList.remove("hidden");
+      quizStatus.textContent = currentLang === "zh" ? "正在載入題目..." : "Loading questions...";
+
       try {
         await addDoc(collection(db, "quizSetups"), quizData);
 
-        quizStatus.textContent =
-          "Quiz setup saved successfully.\n" +
-          "Topic: " + quizData.topic + "\n" +
-          "Difficulty: " + quizData.difficulty + "\n" +
-          "Questions: " + quizData.questionCount;
-
-        const selectedTopic = quizData.topic;
-        const selectedDifficulty = quizData.difficulty;
-        const selectedCount = quizData.questionCount;
-
-        quizForm.reset();
-        difficultyInput.value = "medium";
-        questionCountInput.value = "20";
-
-        quizStatus.textContent += "\n" + (currentLang === "zh" ? "正在載入題目..." : "Loading questions...");
         const questionPool = await getQuestionPool();
-        activeQuestions = selectQuestions(questionPool, selectedTopic, selectedDifficulty, selectedCount);
+        activeQuestions = selectQuestions(questionPool, quizData.topic, quizData.difficulty, quizData.questionCount);
         activeIndex = 0;
         score = 0;
         quizSummary.classList.add("hidden");
@@ -2622,14 +2712,24 @@
           practiceProgress.textContent =
             currentLang === "zh"
               ? "此題庫暫時未有符合條件的題目，請嘗試「混合難度」或「全部主題」。"
-              : "No demo questions match this topic/difficulty yet. Try 'Mixed' difficulty or 'All Topics'.";
+              : "No questions match this topic/difficulty yet. Try 'Mixed' difficulty or 'All Topics'.";
+          quizStatus.classList.add("hidden");
         } else {
+          if (activeQuestions.length < quizData.questionCount) {
+            quizStatus.textContent =
+              currentLang === "zh"
+                ? `已載入 ${activeQuestions.length} 條題目（少於要求的 ${quizData.questionCount} 條，因為這個組合暫時只有這麼多題目）。`
+                : `Loaded ${activeQuestions.length} question(s) — fewer than the ${quizData.questionCount} requested, since that's all that's currently available for this topic/difficulty.`;
+          } else {
+            quizStatus.classList.add("hidden");
+          }
           practiceCard.classList.remove("hidden");
           renderQuestion(0);
           practiceCard.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       } catch (error) {
-        quizStatus.textContent = "Error saving quiz setup: " + error.message;
+        quizStatus.classList.remove("hidden");
+        quizStatus.textContent = "Error starting practice: " + error.message;
       }
     });
 
